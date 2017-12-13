@@ -1,0 +1,22 @@
+server {
+    listen 80 default_server;
+    server_name zen;
+
+    root /var/www/zen;
+
+    index index.php index.html index.htm;
+
+    charset utf-8;
+
+    if ($request_method !~ ^(GET|HEAD|POST)$ ) {
+       return 405;
+    }
+
+    include /etc/nginx/conf.d/*.redirect; 
+
+    error_page  500 502 503 504  /50x.html;
+    error_page  404              /404.html;
+    location = /404.html {
+	internal;
+    }
+}

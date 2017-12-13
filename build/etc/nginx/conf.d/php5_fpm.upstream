@@ -1,0 +1,4 @@
+upstream php5_fpm {
+    # Upstream to abstract back-end connection(s) for PHP
+    server unix:/var/run/php/php5-fpm.sock;
+} 

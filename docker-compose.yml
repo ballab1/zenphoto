@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+    zen:
+        build:
+            context: ../zenphoto
+            args:
+                TZ: "America/New_York"
+        image: zenphoto:20171210
+        container_name: zen
+        hostname: zen
+#        restart: unless-stopped
+        environment:
+            TZ: "America/New_York"
+        volumes:
+            - ../zenphoto/photos:/var/www/zen/albums
+            - ../zenphoto/log:/var/log 
+        ports:
+            - 8004:80
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
