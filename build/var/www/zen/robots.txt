@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /zen/albums/
+Allow: /zen/cache/
+Allow: /zen/cache_html/
+Disallow: /zen/themes/
+Disallow: /zen/zp-core/
+Disallow: /zen/zp-data/
+Disallow: /zen/page/search/
+Disallow: /zen/uploaded/
+Disallow: /zen/backup/
+
+# Link to the sitemap file if using teh sitemap-extended plugin.
+# Change it to your domain and uncomment the line to use it:
+# sitemap: http://www.yourdomain.com/cache_html/sitemap/sitemapindex.xml

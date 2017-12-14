@@ -10,6 +10,8 @@ services:
         container_name: zen
         hostname: zen
 #        restart: unless-stopped
+        links:
+            - mysql
         environment:
             TZ: "America/New_York"
         volumes:

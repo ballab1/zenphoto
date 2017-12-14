@@ -146,16 +146,17 @@ function installCUSTOMIZATIONS()
     printf "\nAdd configuration and customizations\n"
     cp -r "${TOOLS}/etc"/* /etc
 #    cp -r "${TOOLS}/usr"/* /usr
-#    cp -r "${TOOLS}/var"/* /var
+    cp -r "${TOOLS}/var"/* /var
 
+    [[ -f /etc/conf.d/nginx/default.conf ]]  && rm /etc/nginx/conf.d/default.conf
     if [[ -h /var/lib/nginx/logs ]]; then
         rm /var/lib/nginx/logs
         ln -s /var/log /var/lib/nginx/logs
     fi
-    [[ -d /var/nginx/client_body_temp ]] || mkdir -p /var/nginx/client_body_temp
-    [[ -d /sessions ]]                   || mkdir -p /sessions
-    [[ -d /var/run/php ]]                || mkdir -p /var/run/php
-    [[ -d /run/nginx ]]                  || mkdir -p /run/nginx
+    [[ -d /var/nginx/client_body_temp ]]     || mkdir -p /var/nginx/client_body_temp
+    [[ -d /var/run/php ]]                    || mkdir -p /var/run/php
+    [[ -d /run/nginx ]]                      || mkdir -p /run/nginx
+    [[ -d /sessions ]]                       || mkdir -p /sessions
 }
 
 
@@ -205,6 +206,11 @@ function setPermissions()
     find "${WWW}" -type d -exec chmod 755 {} \;
     find "${WWW}" -type f -exec chmod 644 {} \;
     chown -R "${www_user}:${www_user}" "${WWW}"
+    
+    cd "${WWW}/zp-data"
+    chmod 444 .htaccess
+    chmod 640 security.log
+    chmod 600 zenphoto.cfg.*
 }
 
 
