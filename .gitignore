@@ -1,7 +1,1 @@
-nagios.tgz
-*.log
-x/*
-archives/*
-config/*
-log/*
-photos/*
+vols/*

@@ -14,6 +14,9 @@ services:
             - mysql
         environment:
             TZ: "America/New_York"
+            DBUSER: ${CFG_MYSQL_USER}
+            DBPASS: ${CFG_MYSQL_PASSWORD}
+            DBHOST: 'mysql'
         volumes:
             - ../zenphoto/photos:/var/www/zen/albums
             - ../zenphoto/log:/var/log 

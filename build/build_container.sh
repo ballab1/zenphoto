@@ -70,7 +70,7 @@ function die() {
 function cleanup()
 {
     printf "\nclean up\n"
-    rm -rf /tmp/*
+#    rm -rf /tmp/*
 }
 
 
@@ -83,20 +83,33 @@ function createUserAndGroup()
     local -r gid=$4
     local -r homedir=$5
     local -r shell=$6
+    local result
+    
+    local wanted=$( printf '%s:%s' $group $gid )
+    local nameMatch=$( getent group "${group}" | awk -F ':' '{ printf "%s:%s",$1,$3 }' )
+    local idMatch=$( getent group "${gid}" | awk -F ':' '{ printf "%s:%s",$1,$3 }' )
+    printf "group/gid (%s):  is currently (%s)/(%s)\n" "$wanted" "$nameMatch" "$idMatch"           
 
-    printf "\ncreate group:  %s\n" $group
-    if [[ "$(cat /etc/group | grep -E ":${gid}:")" ]]; then
-        [[  "$(cat /etc/group | grep -E "^${group}:x:${gid}:")"  ]] || exit 1
+    if [[ $wanted != $nameMatch  ||  $wanted != $idMatch ]]; then
+        printf "\ncreate group:  %s\n" $group
+        [[ "$nameMatch"  &&  $wanted != $nameMatch ]] && groupdel "$( getent group ${group} | awk -F ':' '{ print $1 }' )"
+        [[ "$idMatch"    &&  $wanted != $idMatch ]]   && groupdel "$( getent group ${gid} | awk -F ':' '{ print $1 }' )"
+        /usr/sbin/groupadd --gid "${gid}" "${group}"
     fi
-    [[ "$(cat /etc/group | grep -E "^${group}:")" ]] \
-       ||  /usr/sbin/groupadd --gid "${gid}" "${group}"
 
-    printf "create user: %s\n" $user
-    if [[ "$(cat /etc/passwd | grep -E ":${uid}:")" ]]; then
-        [[ "$(cat /etc/passwd | grep -E "^${user}:x:${uid}:${gid}:")" ]] || exit 1
+    
+    wanted=$( printf '%s:%s' $user $uid )
+    nameMatch=$( getent passwd "${user}" | awk -F ':' '{ printf "%s:%s",$1,$3 }' )
+    idMatch=$( getent passwd "${uid}" | awk -F ':' '{ printf "%s:%s",$1,$3 }' )
+    printf "user/uid (%s):  is currently (%s)/(%s)\n" "$wanted" "$nameMatch" "$idMatch"    
+    
+    if [[ $wanted != $nameMatch  ||  $wanted != $idMatch ]]; then
+        printf "create user: %s\n" $user
+        [[ "$nameMatch"  &&  $wanted != $nameMatch ]] && userdel "$( getent passwd ${user} | awk -F ':' '{ print $1 }' )"
+        [[ "$idMatch"    &&  $wanted != $idMatch ]]   && userdel "$( getent passwd ${uid} | awk -F ':' '{ print $1 }' )"
+
+        /usr/sbin/useradd --home-dir "$homedir" --uid "${uid}" --gid "${gid}" --no-create-home --shell "${shell}" "${user}"
     fi
-    [[ "$(cat /etc/passwd | grep -E "^${user}:")" ]] \
-       ||  /usr/sbin/useradd --home-dir "$homedir" --uid "${uid}" --gid "${gid}" --no-create-home --shell "${shell}" "${user}"
 }
 
 #############################################################################
@@ -145,8 +158,10 @@ function installCUSTOMIZATIONS()
 {
     printf "\nAdd configuration and customizations\n"
     cp -r "${TOOLS}/etc"/* /etc
-#    cp -r "${TOOLS}/usr"/* /usr
+    cp -r "${TOOLS}/usr"/* /usr
     cp -r "${TOOLS}/var"/* /var
+
+    ln -s /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh
 
     [[ -f /etc/conf.d/nginx/default.conf ]]  && rm /etc/nginx/conf.d/default.conf
     if [[ -h /var/lib/nginx/logs ]]; then
@@ -198,19 +213,23 @@ function setPermissions()
     chown root:root /etc/sudoers.d/*
     chmod 600 /etc/sudoers.d/*
 
-    www_user='nobody'
-    chown "${www_user}:${www_user}" -R /var/nginx/client_body_temp
-    chown "${www_user}:${www_user}" -R /sessions
-    chown "${www_user}:${www_user}" -R /var/run/php
+    chmod u+rwx /usr/local/bin/docker-entrypoint.sh
 
     find "${WWW}" -type d -exec chmod 755 {} \;
     find "${WWW}" -type f -exec chmod 644 {} \;
-    chown -R "${www_user}:${www_user}" "${WWW}"
     
     cd "${WWW}/zp-data"
     chmod 444 .htaccess
     chmod 640 security.log
     chmod 600 zenphoto.cfg.*
+
+www_user='nobody'
+www_group='nobody'
+    chown "${www_user}:${www_group}" -R /var/nginx/client_body_temp
+    chown "${www_user}:${www_group}" -R /sessions
+    chown "${www_user}:${www_group}" -R /var/run/php
+    chown "${www_user}:${www_group}" -R /var/log
+    chown "${www_user}:${www_group}" -R "${WWW}"
 }
 
 
