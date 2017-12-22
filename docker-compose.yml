@@ -5,8 +5,11 @@ services:
         build:
             context: ../zenphoto
             args:
-                TZ: "America/New_York"
-        image: zenphoto:20171210
+                TZ: "America/New_York"  
+                DBUSER: ${CFG_MYSQL_USER}
+                DBPASS: ${CFG_MYSQL_PASSWORD}
+                DBHOST: 'mysql'
+        image: zenphoto:20171222
         container_name: zen
         hostname: zen
 #        restart: unless-stopped

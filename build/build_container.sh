@@ -5,7 +5,16 @@ set -o errexit
 set -o nounset 
 #set -o verbose
 
-declare TOOLS="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  
+export TZ="${TZ:-'America/New_York'}"
+export DBUSER="${DBUSER?'Envorinment variable DBUSER must be defined'}"
+export DBPASS="${DBPASS?'Envorinment variable DBPASS must be defined'}"
+export DBHOST="${DBHOST:-'mysql'}" 
+
+declare -r TOOLS="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  
+declare -r BUILDTIME_PKGS="alpine-sdk bash-completion busybox file git gnutls-utils libxml2-dev linux-headers musl-utils"
+declare -r CORE_PKGS="bash curl findutils libgd libxml2 mysql-client nginx openssh-client shadow sudo supervisor ttf-dejavu tzdata unzip util-linux zlib"
+declare -r PHP_PKGS="php5-fpm php5-ctype php5-common php5-dom php5-gettext php5-iconv php5-gd php5-json php5-mysql php5-posix php5-sockets php5-xml php5-xmlreader php5-xmlrpc php5-zip"
+declare -r ZEN_PKGS="freetype gd jpeg libjpeg libpng openssl rsync" 
 
 
 # zenphoto
@@ -67,10 +76,29 @@ function die() {
 }  
 
 #############################################################################
+function installAlpinePackages()
+{
+    apk update
+    apk add --no-cache --virtual .buildDepedencies $BUILDTIME_PKGS 
+    apk add --no-cache $CORE_PKGS
+    apk add --no-cache $PHP_PKGS
+    apk add --no-cache $ZEN_PKGS
+}
+
+#############################################################################
+function installTimezone()
+{
+    echo "$TZ" > /etc/TZ
+    cp /usr/share/zoneinfo/$TZ /etc/timezone
+    cp /usr/share/zoneinfo/$TZ /etc/localtime
+}  
+
+#############################################################################
 function cleanup()
 {
     printf "\nclean up\n"
-#    rm -rf /tmp/*
+
+    apk del .buildDepedencies
 }
 
 
@@ -88,7 +116,7 @@ function createUserAndGroup()
     local wanted=$( printf '%s:%s' $group $gid )
     local nameMatch=$( getent group "${group}" | awk -F ':' '{ printf "%s:%s",$1,$3 }' )
     local idMatch=$( getent group "${gid}" | awk -F ':' '{ printf "%s:%s",$1,$3 }' )
-    printf "group/gid (%s):  is currently (%s)/(%s)\n" "$wanted" "$nameMatch" "$idMatch"           
+    printf "\e[1;34mINFO: group/gid (%s):  is currently (%s)/(%s)\e[0m\n" "$wanted" "$nameMatch" "$idMatch"           
 
     if [[ $wanted != $nameMatch  ||  $wanted != $idMatch ]]; then
         printf "\ncreate group:  %s\n" $group
@@ -101,7 +129,7 @@ function createUserAndGroup()
     wanted=$( printf '%s:%s' $user $uid )
     nameMatch=$( getent passwd "${user}" | awk -F ':' '{ printf "%s:%s",$1,$3 }' )
     idMatch=$( getent passwd "${uid}" | awk -F ':' '{ printf "%s:%s",$1,$3 }' )
-    printf "user/uid (%s):  is currently (%s)/(%s)\n" "$wanted" "$nameMatch" "$idMatch"    
+    printf "\e[1;34mINFO: user/uid (%s):  is currently (%s)/(%s)\e[0m\n" "$wanted" "$nameMatch" "$idMatch"    
     
     if [[ $wanted != $nameMatch  ||  $wanted != $idMatch ]]; then
         printf "create user: %s\n" $user
@@ -154,7 +182,7 @@ function fixupNginxLogDirecory()
 
 
 #############################################################################
-function installCUSTOMIZATIONS()
+function install_CUSTOMIZATIONS()
 {
     printf "\nAdd configuration and customizations\n"
     cp -r "${TOOLS}/etc"/* /etc
@@ -176,7 +204,7 @@ function installCUSTOMIZATIONS()
 
 
 #############################################################################
-function installZENPHOTO()
+function install_ZENPHOTO()
 {
     local -r file="$ZEN_FILE"
 
@@ -190,7 +218,7 @@ function installZENPHOTO()
 
 
 #############################################################################
-function installPHP()
+function install-PHP()
 {
     local -r file="$PHP_FILE"
 
@@ -241,13 +269,14 @@ trap catch_pipe PIPE
 
 set -o verbose
 
+installAlpinePackages
+installTimezone
 createUserAndGroup "${www_user}" "${www_uid}" "${www_group}" "${www_gid}" "${WWW}" /sbin/nologin
-
 downloadFiles
 fixupNginxLogDirecory
-#installPHP
-installZENPHOTO
-installCUSTOMIZATIONS
+#install_PHP
+install_ZENPHOTO
+install_CUSTOMIZATIONS
 setPermissions
 cleanup
 exit 0
