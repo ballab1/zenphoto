@@ -269,7 +269,7 @@ trap catch_pipe PIPE
 
 set -o verbose
 
-heaader
+header
 export DBUSER="${DBUSER?'Envorinment variable DBUSER must be defined'}"
 export DBPASS="${DBPASS?'Envorinment variable DBPASS must be defined'}"
 export DBHOST="${DBHOST:-'mysql'}" 
