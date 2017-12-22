@@ -31,7 +31,7 @@ declare -r PHP_SHA256="6687ed2f09150b2ad6b3780ff89715891f83a9c331e69c90241ef699d
 
 
 #directories
-declare WWW=/var/www/zen
+declare WWW=/var/www/photos
 
 #  groups/users
 declare www_user=${www_user:-'www-data'}

@@ -2,7 +2,7 @@ server {
     listen 80 default_server;
     server_name zen;
 
-    root /var/www/zen;
+    root /var/www/photos;
 
     index index.php index.html index.htm;
 
