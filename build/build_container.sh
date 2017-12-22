@@ -5,12 +5,12 @@ set -o errexit
 set -o nounset 
 #set -o verbose
 
-export TZ="${TZ:-'America/New_York'}"
-export DBUSER="${DBUSER?'Envorinment variable DBUSER must be defined'}"
-export DBPASS="${DBPASS?'Envorinment variable DBPASS must be defined'}"
-export DBHOST="${DBHOST:-'mysql'}" 
+declare -r CONTAINER='ZENPHOTO'
 
+export TZ="${TZ:-'America/New_York'}"
 declare -r TOOLS="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  
+
+
 declare -r BUILDTIME_PKGS="alpine-sdk bash-completion busybox file git gnutls-utils libxml2-dev linux-headers musl-utils"
 declare -r CORE_PKGS="bash curl findutils libgd libxml2 mysql-client nginx openssh-client shadow sudo supervisor ttf-dejavu tzdata unzip util-linux zlib"
 declare -r PHP_PKGS="php5-fpm php5-ctype php5-common php5-dom php5-gettext php5-iconv php5-gd php5-json php5-mysql php5-posix php5-sockets php5-xml php5-xmlreader php5-xmlrpc php5-zip"
@@ -76,31 +76,12 @@ function die() {
 }  
 
 #############################################################################
-function installAlpinePackages()
-{
-    apk update
-    apk add --no-cache --virtual .buildDepedencies $BUILDTIME_PKGS 
-    apk add --no-cache $CORE_PKGS
-    apk add --no-cache $PHP_PKGS
-    apk add --no-cache $ZEN_PKGS
-}
-
-#############################################################################
-function installTimezone()
-{
-    echo "$TZ" > /etc/TZ
-    cp /usr/share/zoneinfo/$TZ /etc/timezone
-    cp /usr/share/zoneinfo/$TZ /etc/localtime
-}  
-
-#############################################################################
 function cleanup()
 {
     printf "\nclean up\n"
 
     apk del .buildDepedencies
 }
-
 
 #############################################################################
 function createUserAndGroup()
@@ -141,6 +122,13 @@ function createUserAndGroup()
 }
 
 #############################################################################
+function header()
+{
+    local -r bars='+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+    printf "\n\n\e[1;34m%s\nBuilding container: \e[0m%s\e[1;34m\n%s\e[0m\n" $bars $CONTAINER $bars
+}
+ 
+#############################################################################
 function downloadFile()
 {
     local -r name=$1
@@ -180,7 +168,6 @@ function fixupNginxLogDirecory()
     fi
 }
 
-
 #############################################################################
 function install_CUSTOMIZATIONS()
 {
@@ -202,6 +189,20 @@ function install_CUSTOMIZATIONS()
     [[ -d /sessions ]]                       || mkdir -p /sessions
 }
 
+#############################################################################
+function install_PHP()
+{
+    local -r file="$PHP_FILE"
+
+    printf "\nprepare and install %s\n" "${file}"
+    cd ${TOOLS}
+    tar xf "${file}"
+
+    cd "php-${PHP_VERSION}"
+    ./configure --enable-fpm --with-mysql --enable-zip --disable-phar --with-libxml-dir=/usr/lib --enable-sockets
+    make all
+    make install
+}
 
 #############################################################################
 function install_ZENPHOTO()
@@ -216,22 +217,22 @@ function install_ZENPHOTO()
     mv -f * "${WWW}/"
 }
 
-
 #############################################################################
-function install-PHP()
+function installAlpinePackages()
 {
-    local -r file="$PHP_FILE"
-
-    printf "\nprepare and install %s\n" "${file}"
-    cd ${TOOLS}
-    tar xf "${file}"
-
-    cd "php-${PHP_VERSION}"
-    ./configure --enable-fpm --with-mysql --enable-zip --disable-phar --with-libxml-dir=/usr/lib --enable-sockets
-    make all
-    make install
+    apk update
+    apk add --no-cache --virtual .buildDepedencies $BUILDTIME_PKGS 
+    apk add --no-cache $CORE_PKGS
+    apk add --no-cache $PHP_PKGS
+    apk add --no-cache $ZEN_PKGS
 }
 
+#############################################################################
+function installTimezone() {
+    echo "$TZ" > /etc/TZ
+    cp /usr/share/zoneinfo/$TZ /etc/timezone
+    cp /usr/share/zoneinfo/$TZ /etc/localtime
+}
 
 #############################################################################
 function setPermissions()
@@ -260,7 +261,6 @@ www_group='nobody'
     chown "${www_user}:${www_group}" -R "${WWW}"
 }
 
-
 #############################################################################
 
 trap catch_error ERR
@@ -268,6 +268,11 @@ trap catch_int INT
 trap catch_pipe PIPE 
 
 set -o verbose
+
+heaader
+export DBUSER="${DBUSER?'Envorinment variable DBUSER must be defined'}"
+export DBPASS="${DBPASS?'Envorinment variable DBPASS must be defined'}"
+export DBHOST="${DBHOST:-'mysql'}" 
 
 installAlpinePackages
 installTimezone

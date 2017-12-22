@@ -1,6 +1,6 @@
 location ~ ^/photos/(.*)$ {
     rewrite ^/photos/([^\.]*[^/])$ /$1 permanent;
-    try_files $uri $uri/ /zen/index.php?$args;
+    try_files $uri $uri/ /index.php?$args;
 } 
 
 location ~ \.php$ {
