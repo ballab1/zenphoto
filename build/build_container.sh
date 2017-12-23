@@ -31,7 +31,7 @@ declare -r PHP_SHA256="6687ed2f09150b2ad6b3780ff89715891f83a9c331e69c90241ef699d
 
 
 #directories
-declare WWW=/var/www/photos
+declare WWW=/var/www
 
 #  groups/users
 declare www_user=${www_user:-'www-data'}
@@ -122,13 +122,6 @@ function createUserAndGroup()
 }
 
 #############################################################################
-function header()
-{
-    local -r bars='+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-    printf "\n\n\e[1;34m%s\nBuilding container: \e[0m%s\e[1;34m\n%s\e[0m\n" $bars $CONTAINER $bars
-}
- 
-#############################################################################
 function downloadFile()
 {
     local -r name=$1
@@ -168,6 +161,13 @@ function fixupNginxLogDirecory()
     fi
 }
 
+#############################################################################
+function header()
+{
+    local -r bars='+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
+    printf "\n\n\e[1;34m%s\nBuilding container: \e[0m%s\e[1;34m\n%s\e[0m\n" $bars $CONTAINER $bars
+}
+ 
 #############################################################################
 function install_CUSTOMIZATIONS()
 {
@@ -213,8 +213,8 @@ function install_ZENPHOTO()
     cd ${TOOLS}
     tar xzf "${file}"
     cd "zenphoto-zenphoto-${ZEN_VERSION}"
-    mkdir -p "${WWW}"
-    mv -f * "${WWW}/"
+    mkdir -p "${WWW}/photos"
+    mv -f * "${WWW}/photos"
 }
 
 #############################################################################
@@ -247,7 +247,7 @@ function setPermissions()
     find "${WWW}" -type d -exec chmod 755 {} \;
     find "${WWW}" -type f -exec chmod 644 {} \;
     
-    cd "${WWW}/zp-data"
+    cd "${WWW}/photos/zp-data"
     chmod 444 .htaccess
     chmod 640 security.log
     chmod 600 zenphoto.cfg.*

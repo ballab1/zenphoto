@@ -3,7 +3,7 @@ version: '3.1'
 services:
     zen:
         build:
-            context: ../zenphoto
+            context: ../zen
             args:
                 TZ: "America/New_York"  
                 DBUSER: ${CFG_MYSQL_USER}
@@ -21,8 +21,8 @@ services:
             DBPASS: ${CFG_MYSQL_PASSWORD}
             DBHOST: 'mysql'
         volumes:
-            - ../zenphoto/photos:/var/www/zen/albums
-            - ../zenphoto/log:/var/log 
+            - ../zen/vols/photos:/var/www/photos/albums
+            - ../zen/vols/log:/var/log 
         ports:
             - 8004:80
         logging:

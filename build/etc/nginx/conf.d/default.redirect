@@ -1,7 +1,7 @@
-location ~ ^/photos/(.*)$ {
-    rewrite ^/photos/([^\.]*[^/])$ /$1 permanent;
-    try_files $uri $uri/ /index.php?$args;
-} 
+#location ~ /photos(.*)$ {
+#    rewrite /photos(.*)$  /$1 break;
+#    try_files $uri $uri/ /index.php?$args;
+#} 
 
 location ~ \.php$ {
     fastcgi_intercept_errors on;
