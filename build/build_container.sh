@@ -5,33 +5,30 @@ set -o errexit
 set -o nounset 
 #set -o verbose
 
+        
 declare -r CONTAINER='ZENPHOTO'
 
 export TZ="${TZ:-'America/New_York'}"
+export SESSIONS_DIR='/sessions'
 declare -r TOOLS="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  
 
 
-declare -r BUILDTIME_PKGS="alpine-sdk bash-completion busybox file git gnutls-utils libxml2-dev linux-headers musl-utils"
+declare -r BUILDTIME_PKGS="alpine-sdk php5-dev pcre-dev build-base autoconf libtool bash-completion busybox file git gnutls-utils libxml2-dev linux-headers musl-utils"
 declare -r CORE_PKGS="bash curl findutils libgd libxml2 mysql-client nginx openssh-client shadow sudo supervisor ttf-dejavu tzdata unzip util-linux zlib"
-declare -r PHP_PKGS="php5-fpm php5-ctype php5-common php5-dom php5-gettext php5-iconv php5-gd php5-json php5-mysql php5-posix php5-sockets php5-xml php5-xmlreader php5-xmlrpc php5-zip"
+declare -r PHP_PKGS="php5-fpm php5-ctype php5-common php5-dom php5-gettext php5-iconv php5-gd php5-json php5-mysql php5-posix php5-sockets php5-xml php5-xmlreader php5-xmlrpc php5-xsl php5-zip"
 declare -r ZEN_PKGS="freetype gd jpeg libjpeg libpng openssl rsync" 
 
-
+    
 # zenphoto
 declare -r ZEN_VERSION=${ZEN_VERSION:-'1.4.14'}
 declare -r ZEN_FILE="zenphoto-${ZEN_VERSION}.tar.gz"
 declare -r ZEN_URL="https://github.com/zenphoto/zenphoto/archive/zenphoto-${ZEN_VERSION}.tar.gz"
 declare -r ZEN_SHA256="ecd0efac214e60be9ed339977d7be946a34f6eeb5fe2adc6c20fa42bd450ebff"
 
-# PHP
-declare -r PHP_VERSION=${PHP_VERSION:-'5.6.31'}    
-declare -r PHP_FILE="php-${PHP_VERSION}.tar.gz"
-declare -r PHP_URL="http://us2.php.net/get/php-${PHP_VERSION}.tar.gz/from/this/mirror"
-declare -r PHP_SHA256="6687ed2f09150b2ad6b3780ff89715891f83a9c331e69c90241ef699dec4c43f"
-
 
 #directories
-declare WWW=/var/www
+declare -r WWW=/var/www
+declare -r ZEN_DIR="${WWW}/photos"
 
 #  groups/users
 declare www_user=${www_user:-'www-data'}
@@ -146,7 +143,6 @@ function downloadFiles()
 {
     cd ${TOOLS}
 
-    #downloadFile 'PHP' 
     downloadFile 'ZEN' 
 }
 
@@ -184,24 +180,12 @@ function install_CUSTOMIZATIONS()
         ln -s /var/log /var/lib/nginx/logs
     fi
     [[ -d /var/nginx/client_body_temp ]]     || mkdir -p /var/nginx/client_body_temp
+    [[ -d "${SESSIONS_DIR}" ]]               || mkdir -p "${SESSIONS_DIR}"
     [[ -d /var/run/php ]]                    || mkdir -p /var/run/php
     [[ -d /run/nginx ]]                      || mkdir -p /run/nginx
-    [[ -d /sessions ]]                       || mkdir -p /sessions
-}
-
-#############################################################################
-function install_PHP()
-{
-    local -r file="$PHP_FILE"
-
-    printf "\nprepare and install %s\n" "${file}"
-    cd ${TOOLS}
-    tar xf "${file}"
-
-    cd "php-${PHP_VERSION}"
-    ./configure --enable-fpm --with-mysql --enable-zip --disable-phar --with-libxml-dir=/usr/lib --enable-sockets
-    make all
-    make install
+    
+    sed -i "s|^.*date.timezone =.*$|date.timezone = ${TZ}|" '/etc/php5/php.ini'
+    sed -i "s|^.*session.save_path =.*$|session.save_path = \"${SESSIONS_DIR}\"|" '/etc/php5/php.ini'
 }
 
 #############################################################################
@@ -210,11 +194,13 @@ function install_ZENPHOTO()
     local -r file="$ZEN_FILE"
 
     printf "\nprepare and install %s\n" "${file}"
+    
     cd ${TOOLS}
     tar xzf "${file}"
     cd "zenphoto-zenphoto-${ZEN_VERSION}"
-    mkdir -p "${WWW}/photos"
-    mv -f * "${WWW}/photos"
+    
+    mkdir -p "${ZEN_DIR}"
+    mv -f * "${ZEN_DIR}"
 }
 
 #############################################################################
@@ -222,9 +208,7 @@ function installAlpinePackages()
 {
     apk update
     apk add --no-cache --virtual .buildDepedencies $BUILDTIME_PKGS 
-    apk add --no-cache $CORE_PKGS
-    apk add --no-cache $PHP_PKGS
-    apk add --no-cache $ZEN_PKGS
+    apk add --no-cache $CORE_PKGS $PHP_PKGS $ZEN_PKGS
 }
 
 #############################################################################
@@ -245,11 +229,11 @@ function setPermissions()
     chmod u+rwx /usr/local/bin/docker-entrypoint.sh
 
     find "${WWW}" -type d -exec chmod 755 {} \;
-    find "${WWW}" -type f -exec chmod 644 {} \;
+    find "${WWW}" -type f -exec chmod 444 {} \;
     
-    cd "${WWW}/photos/zp-data"
+    cd "${ZEN_DIR}/zp-data"
     chmod 444 .htaccess
-    chmod 640 security.log
+    chmod 600 security.log
     chmod 600 zenphoto.cfg.*
 
 www_user='nobody'
@@ -279,7 +263,6 @@ installTimezone
 createUserAndGroup "${www_user}" "${www_uid}" "${www_group}" "${www_gid}" "${WWW}" /sbin/nologin
 downloadFiles
 fixupNginxLogDirecory
-#install_PHP
 install_ZENPHOTO
 install_CUSTOMIZATIONS
 setPermissions

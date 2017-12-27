@@ -28,5 +28,5 @@ RUN set -o verbose \
 #USER $zen_user
 #WORKDIR $ZEN_HOME\
 
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
+ENTRYPOINT [ "docker-entrypoint.sh" ]
 CMD ["zen"]
