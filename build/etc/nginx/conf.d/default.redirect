@@ -1,14 +1,13 @@
-location ~ ^/photos/(.*)$ {
-    rewrite ^/photos/(.*)$ /zen/$1;
-    try_files $uri $uri/ /zen/index.php;
-} 
+#location ~ /photos(.*)$ {
+#    rewrite /photos(.*)$  /$1 break;
+#    try_files $uri $uri/ /index.php?$args;
+#} 
 
 location ~ \.php$ {
     fastcgi_intercept_errors on;
 
     # regex to split $uri to $fastcgi_script_name and $fastcgi_path
     fastcgi_split_path_info ^(.+\.php)(/.+)$;
-#    fastcgi_split_path_info ^(.+\.php)(.*)$;
 
     # Check that the PHP script exists before passing it
     try_files $fastcgi_script_name =404;
@@ -17,28 +16,13 @@ location ~ \.php$ {
     # see: https://trac.nginx.org/nginx/ticket/321
     set $path_info $fastcgi_path_info;
     fastcgi_param PATH_INFO $path_info;
-#    fastcgi_param  PATH_INFO $fastcgi_script_name;
 
     fastcgi_read_timeout 1200;
     fastcgi_buffering off;
 
-#    try_files $uri $uri/ =404;
     fastcgi_pass php5_fpm;
     fastcgi_index index.php;
     include /etc/nginx/fastcgi.conf; 
-#    fastcgi_param   SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-}
-
-location ~ \.cgi$ {
-    root /usr/local/nagios/sbin;
-    rewrite ^/nagios/cgi-bin/(.*)$ /$1;
-    rewrite ^/cgi-bin/(.*)$ /$1;
-    include /etc/nginx/fastcgi_params;
-
-    fastcgi_param AUTH_USER $remote_user;
-    fastcgi_param REMOTE_USER $remote_user;
-    fastcgi_param SCRIPT_FILENAME /usr/local/nagios/sbin/$fastcgi_script_name;
-    fastcgi_pass fcgiwrap;
 }
 
 location ~ /\. {
