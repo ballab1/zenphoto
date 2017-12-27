@@ -76,12 +76,37 @@ location / {
 }
 
 # pass the PHP scripts to php-fpm server
+    # regex to split $uri to $fastcgi_script_name and $fastcgi_path
+    # Check that the PHP script exists before passing it
+    # Bypass the fact that try_files resets $fastcgi_path_info
+    # see: https://trac.nginx.org/nginx/ticket/321
+#location ~ \.php$ {
+#    try_files $uri =404;
+#    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+#    include fastcgi_params;
+#    fastcgi_read_timeout 120;        
+#    fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;
+#    fastcgi_index index.php;
+#    fastcgi_pass php5_fpm;
+#}
+
 location ~ \.php$ {
-    try_files $uri =404;
+    fastcgi_intercept_errors on;
     fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    include fastcgi_params;
-    fastcgi_read_timeout 120;        
-    fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;
+    try_files $fastcgi_script_name =404;
+    set $path_info $fastcgi_path_info;
+    fastcgi_param PATH_INFO $path_info;
+    fastcgi_read_timeout 1200;
+    fastcgi_buffering off;
     fastcgi_index index.php;
+    include /etc/nginx/fastcgi.conf; 
     fastcgi_pass php5_fpm;
+}
+
+location ~ /\. {
+    deny  all;
+}
+
+location ~ /(libraries|templates) {
+    deny all;
 }

@@ -5,8 +5,21 @@ set -o errexit
 set -o nounset 
 #set -o verbose
 
+<<<<<<< HEAD:build/build_container.sh
         
 declare -r CONTAINER='ZENPHOTO'
+=======
+declare -r CONTAINER='ZENPHOTO'
+
+export TZ="${TZ:-'America/New_York'}"
+declare -r TOOLS="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"  
+
+
+declare -r BUILDTIME_PKGS="alpine-sdk bash-completion busybox file git gnutls-utils libxml2-dev linux-headers musl-utils"
+declare -r CORE_PKGS="bash curl findutils libgd libxml2 mysql-client nginx openssh-client shadow sudo supervisor ttf-dejavu tzdata unzip util-linux zlib"
+declare -r PHP_PKGS="php5-fpm php5-ctype php5-common php5-dom php5-gettext php5-iconv php5-gd php5-json php5-mysql php5-posix php5-sockets php5-xml php5-xmlreader php5-xmlrpc php5-zip"
+declare -r ZEN_PKGS="freetype gd jpeg libjpeg libpng openssl rsync" 
+>>>>>>> master:build/build_container.sh
 
 export TZ="${TZ:-'America/New_York'}"
 export SESSIONS_DIR='/sessions'
@@ -27,8 +40,12 @@ declare -r ZEN_SHA256="ecd0efac214e60be9ed339977d7be946a34f6eeb5fe2adc6c20fa42bd
 
 
 #directories
+<<<<<<< HEAD:build/build_container.sh
 declare -r WWW=/var/www
 declare -r ZEN_DIR="${WWW}/photos"
+=======
+declare WWW=/var/www
+>>>>>>> master:build/build_container.sh
 
 #  groups/users
 declare www_user=${www_user:-'www-data'}
@@ -169,11 +186,25 @@ function install_CUSTOMIZATIONS()
 {
     printf "\nAdd configuration and customizations\n"
     cp -r "${TOOLS}/etc"/* /etc
+<<<<<<< HEAD:build/build_container.sh
     cp -r "${TOOLS}/usr"/* /usr
     cp -r "${TOOLS}/var"/* /var
 
     ln -s /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh
 
+=======
+<<<<<<< HEAD:build/build_zen.sh
+#    cp -r "${TOOLS}/usr"/* /usr
+    cp -r "${TOOLS}/var"/* /var
+
+=======
+    cp -r "${TOOLS}/usr"/* /usr
+    cp -r "${TOOLS}/var"/* /var
+
+    ln -s /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh
+
+>>>>>>> 2bef2227afc1be002e7f366a4b41f77843b1d05c:build/build_container.sh
+>>>>>>> master:build/build_container.sh
     [[ -f /etc/conf.d/nginx/default.conf ]]  && rm /etc/nginx/conf.d/default.conf
     if [[ -h /var/lib/nginx/logs ]]; then
         rm /var/lib/nginx/logs
@@ -189,13 +220,18 @@ function install_CUSTOMIZATIONS()
 }
 
 #############################################################################
+<<<<<<< HEAD:build/build_container.sh
 function install_ZENPHOTO()
+=======
+function install_PHP()
+>>>>>>> master:build/build_container.sh
 {
-    local -r file="$ZEN_FILE"
+    local -r file="$PHP_FILE"
 
     printf "\nprepare and install %s\n" "${file}"
     
     cd ${TOOLS}
+<<<<<<< HEAD:build/build_container.sh
     tar xzf "${file}"
     cd "zenphoto-zenphoto-${ZEN_VERSION}"
     
@@ -209,6 +245,37 @@ function installAlpinePackages()
     apk update
     apk add --no-cache --virtual .buildDepedencies $BUILDTIME_PKGS 
     apk add --no-cache $CORE_PKGS $PHP_PKGS $ZEN_PKGS
+=======
+    tar xf "${file}"
+
+    cd "php-${PHP_VERSION}"
+    ./configure --enable-fpm --with-mysql --enable-zip --disable-phar --with-libxml-dir=/usr/lib --enable-sockets
+    make all
+    make install
+}
+
+#############################################################################
+function install_ZENPHOTO()
+{
+    local -r file="$ZEN_FILE"
+
+    printf "\nprepare and install %s\n" "${file}"
+    cd ${TOOLS}
+    tar xzf "${file}"
+    cd "zenphoto-zenphoto-${ZEN_VERSION}"
+    mkdir -p "${WWW}/photos"
+    mv -f * "${WWW}/photos"
+}
+
+#############################################################################
+function installAlpinePackages()
+{
+    apk update
+    apk add --no-cache --virtual .buildDepedencies $BUILDTIME_PKGS 
+    apk add --no-cache $CORE_PKGS
+    apk add --no-cache $PHP_PKGS
+    apk add --no-cache $ZEN_PKGS
+>>>>>>> master:build/build_container.sh
 }
 
 #############################################################################
@@ -229,12 +296,27 @@ function setPermissions()
     chmod u+rwx /usr/local/bin/docker-entrypoint.sh
 
     find "${WWW}" -type d -exec chmod 755 {} \;
+<<<<<<< HEAD:build/build_container.sh
     find "${WWW}" -type f -exec chmod 444 {} \;
+=======
+    find "${WWW}" -type f -exec chmod 644 {} \;
+<<<<<<< HEAD:build/build_zen.sh
+    chown -R "${www_user}:${www_user}" "${WWW}"
+>>>>>>> master:build/build_container.sh
     
     cd "${ZEN_DIR}/zp-data"
     chmod 444 .htaccess
     chmod 600 security.log
     chmod 600 zenphoto.cfg.*
+<<<<<<< HEAD:build/build_container.sh
+=======
+=======
+    
+    cd "${WWW}/photos/zp-data"
+    chmod 444 .htaccess
+    chmod 640 security.log
+    chmod 600 zenphoto.cfg.*
+>>>>>>> master:build/build_container.sh
 
 www_user='nobody'
 www_group='nobody'
@@ -243,6 +325,10 @@ www_group='nobody'
     chown "${www_user}:${www_group}" -R /var/run/php
     chown "${www_user}:${www_group}" -R /var/log
     chown "${www_user}:${www_group}" -R "${WWW}"
+<<<<<<< HEAD:build/build_container.sh
+=======
+>>>>>>> 2bef2227afc1be002e7f366a4b41f77843b1d05c:build/build_container.sh
+>>>>>>> master:build/build_container.sh
 }
 
 #############################################################################
@@ -263,6 +349,10 @@ installTimezone
 createUserAndGroup "${www_user}" "${www_uid}" "${www_group}" "${www_gid}" "${WWW}" /sbin/nologin
 downloadFiles
 fixupNginxLogDirecory
+<<<<<<< HEAD:build/build_container.sh
+=======
+#install_PHP
+>>>>>>> master:build/build_container.sh
 install_ZENPHOTO
 install_CUSTOMIZATIONS
 setPermissions

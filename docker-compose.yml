@@ -21,7 +21,7 @@ services:
             DBPASS: ${CFG_MYSQL_PASSWORD}
             DBHOST: 'mysql'
         volumes:
-            - ../zen/vols/photos:/var/www/albums
+            - ../zen/vols/photos:/var/www/photos/albums
             - ../zen/vols/log:/var/log 
         ports:
             - 8004:80
