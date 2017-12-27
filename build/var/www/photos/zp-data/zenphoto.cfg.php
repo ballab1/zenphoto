@@ -85,8 +85,8 @@ $conf['special_pages'] = array(
 // on your server, which might work better on some setups.
 ////////////////////////////////////////////////////////////////////////////////
 
-define('WEBPATH', '/photos');
-define('SERVERPATH', '/var/www/photos');
+//define('WEBPATH', '/');
+//define('SERVERPATH', '/var/www');
 
 ////////////////////////////////////////////////////////////////////////////////
 /** Do not edit below this line. **/
