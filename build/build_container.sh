@@ -205,8 +205,13 @@ function install_ZENPHOTO()
     cd ${TOOLS}
     tar xzf "${file}"
     cd "zenphoto-zenphoto-${ZEN_VERSION}"
-    mkdir -p "${WWW}/photos"
-    mv -f * "${WWW}/photos"
+    mkdir -p "${ZEN_DIR}"
+    mv -f * "${ZEN_DIR}/"
+
+    rm "${ZEN_DIR}/LICENSE"
+    rm "${ZEN_DIR}/README.md"
+    rm "${ZEN_DIR}/contributing.md" 
+    rm /etc/nginx/conf.d/default
 }
 
 #############################################################################
