@@ -268,9 +268,9 @@ trap catch_pipe PIPE
 set -o verbose
 
 header
-export DBUSER="${DBUSER?'Envorinment variable DBUSER must be defined'}"
-export DBPASS="${DBPASS?'Envorinment variable DBPASS must be defined'}"
-export DBHOST="${DBHOST:-'mysql'}" 
+declare -r DBUSER="${DBUSER:?'Envorinment variable DBUSER must be defined'}"
+declare -r DBPASS="${DBPASS:?'Envorinment variable DBPASS must be defined'}"
+declare -r DBHOST="${DBHOST:-'mysql'}" 
 
 installAlpinePackages
 installTimezone
