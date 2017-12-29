@@ -1,15 +1,11 @@
 FROM alpine:3.6
 
-ARG TZ="America/New_York"
 ARG DBUSER="${CFG_MYSQL_USER}"
 ARG DBPASS="${CFG_MYSQL_PASSWORD}"
 ARG DBHOST='mysql'
     
 ENV VERSION=1.0.0 \
-    TZ="America/New_York" \
-    DBUSER="${CFG_MYSQL_USER}" \
-    DBPASS="${CFG_MYSQL_PASSWORD}" \
-    DBHOST='mysql'
+    TZ="America/New_York"
 
 LABEL version=$VERSION
 

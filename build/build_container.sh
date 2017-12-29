@@ -174,7 +174,7 @@ function install_CUSTOMIZATIONS()
 
     ln -s /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh
 
-    [[ -f /etc/conf.d/nginx/default.conf ]]  && rm /etc/nginx/conf.d/default.conf
+    [[ -f /etc/conf.d/nginx/default.conf ]] && rm /etc/nginx/conf.d/default.conf
     if [[ -h /var/lib/nginx/logs ]]; then
         rm /var/lib/nginx/logs
         ln -s /var/log /var/lib/nginx/logs
@@ -208,10 +208,10 @@ function install_ZENPHOTO()
     mkdir -p "${ZEN_DIR}"
     mv -f * "${ZEN_DIR}/"
 
-    rm "${ZEN_DIR}/LICENSE"
-    rm "${ZEN_DIR}/README.md"
-    rm "${ZEN_DIR}/contributing.md" 
-    rm /etc/nginx/conf.d/default
+    [[ -f "${ZEN_DIR}/LICENSE" ]]           && rm "${ZEN_DIR}/LICENSE"
+    [[ -f "${ZEN_DIR}/README.md" ]]         && rm "${ZEN_DIR}/README.md"
+    [[ -f "${ZEN_DIR}/contributing.md" ]]   && rm "${ZEN_DIR}/contributing.md" 
+    [[ -f /etc/nginx/conf.d/default.conf ]] && rm /etc/nginx/conf.d/default.conf
 }
 
 #############################################################################
