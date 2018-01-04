@@ -1,28 +1,38 @@
+# pass the PHP scripts to php-fpm server
+location ~ \.php$ {
+    try_files $uri =404;
+    fastcgi_split_path_info ^(.+\.php)(/.+)$;
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    fastcgi_index index.php;
+    fastcgi_pass php5_fpm;
+}
+
 location @zenphoto {
 
     # experimental rss rules
-    rewrite index\.php\?^rss-(.*)&(.*)    /photos/index.php?rss=$1 last;
-    rewrite index\.php\?^rss-(.*)$        /photos/index.php?rss=$1 last;
+    rewrite index\.php\?^rss-(.*)&(.*)    /index.php?rss=$1 last;
+    rewrite index\.php\?^rss-(.*)$        /index.php?rss=$1 last;
 
-    rewrite index\.php$ /photos/index.php last;
-    rewrite ^/(.*)/page/([A-Za-z0-9_\-]+)/?$ /photos/index.php?album=$1&page=$2 last;
+    rewrite index\.php$ /index.php last;
+    rewrite ^/(.*)/page/([A-Za-z0-9_\-]+)/?$ /index.php?album=$1&page=$2 last;
 
     # Images and stuff
-    rewrite "^/(.*)/image/(thumb|[0-9]{1,4})/([^/\\\]+)$"  /photos/zp-core/i.php?a=$1&i=$3&s=$2  last;
-    rewrite ^/(.*)/image/([^/\\\]+)$  /photos/zp-core/i.php?a=$1&i=$2  last;
-    rewrite "^/(.*)/album/(thumb|[0-9]{1,4})/([^/\\\]+)$"  /photos/zp-core/i.php?a=$1&i=$3&s=$2&album=true  last;
+    rewrite "^/(.*)/image/(thumb|[0-9]{1,4})/([^/\\\]+)$"  /zp-core/i.php?a=$1&i=$3&s=$2  last;
+    rewrite ^/(.*)/image/([^/\\\]+)$  /zp-core/i.php?a=$1&i=$2  last;
+    rewrite "^/(.*)/album/(thumb|[0-9]{1,4})/([^/\\\]+)$"  /zp-core/i.php?a=$1&i=$3&s=$2&album=true  last;
 
     # Catch all for unknown stuff
-    rewrite ^/(.*)/?$ /photos/index.php?album=$1 last;
+    rewrite ^/(.*)/?$ /index.php?album=$1 last;
 }
 
 location @albums {
-     rewrite ^/albums/?(.+/?)?$  /photos/$1  redirect;
+     rewrite ^/albums/?(.+/?)?$  /$1  redirect;
 }
 
 # Admin pages
 location /admin {
-    rewrite ^/admin/?$ /photos/zp-core/admin.php redirect;
+    rewrite ^/admin/?$ /zp-core/admin.php redirect;
 }
 
 location /albums {
@@ -31,82 +41,46 @@ location /albums {
 
 # Tiny URLs
 location /tiny {
-    rewrite ^/tiny/([0-9]+)/?$ /photos/index.php?p=$1&t last;
+    rewrite ^/tiny/([0-9]+)/?$ /index.php?p=$1&t last;
 }
 
 # Page
 location /page {
-    rewrite ^/page/([0-9]+)/?$ /photos/index.php?page=$1 last;
-    rewrite ^/page/([A-Za-z0-9\-_]+)/?$ /photos/index.php?p=$1 last;
-    rewrite ^/page/([A-Za-z0-9_\-]+)/([0-9]+)/?$ /photos/index.php?p=$1&page=$2 last;
+    rewrite ^/page/([0-9]+)/?$ /index.php?page=$1 last;
+    rewrite ^/page/([A-Za-z0-9\-_]+)/?$ /index.php?p=$1 last;
+    rewrite ^/page/([A-Za-z0-9_\-]+)/([0-9]+)/?$ /index.php?p=$1&page=$2 last;
 }
 
 # Pages
 location /pages {
-    rewrite ^/pages/?$ /photos/index.php?p=pages last;
-    rewrite ^/pages/(.*)/?$ /photos/index.php?p=pages&title=$1 last;
+    rewrite ^/pages/?$ /index.php?p=pages last;
+    rewrite ^/pages/(.*)/?$ /index.php?p=pages&title=$1 last;
 }
 
 # Search
 location /page/search {
-    rewrite ^/page/search/fields([0-9]+)/(.*)/([0-9]+)/?$ /photos/index.php?p=search&searchfields=$1&words=$2&page=$3 last;
-    rewrite ^/page/search/fields([0-9]+)/(.*)/?$ /photos/index.php?p=search&searchfields=$1&words=$2 last;
-    rewrite ^/page/search/archive/(.*)/([0-9]+)/?$ /photos/index.php?p=search&date=$1&page=$2 last;
-    rewrite ^/page/search/archive/(.*)/?$ /photos/index.php?p=search&date=$1 last;
-    rewrite ^/page/search/tags/(.*)/([0-9]+)/?$ /photos/index.php?p=search&searchfields=tags&words=$1&page=$2 last;
-    rewrite ^/page/search/tags/(.*)/?$ /photos/index.php?p=search&searchfields=tags&words=$1 last;
-    rewrite ^/page/search/(.*)/([0-9]+)/?$ /photos/index.php?p=search&words=$1&page=$2 last;
-    rewrite ^/page/search/(.*)/?$ /photos/index.php?p=search&words=$1 last;
+    rewrite ^/page/search/fields([0-9]+)/(.*)/([0-9]+)/?$ /index.php?p=search&searchfields=$1&words=$2&page=$3 last;
+    rewrite ^/page/search/fields([0-9]+)/(.*)/?$ /index.php?p=search&searchfields=$1&words=$2 last;
+    rewrite ^/page/search/archive/(.*)/([0-9]+)/?$ /index.php?p=search&date=$1&page=$2 last;
+    rewrite ^/page/search/archive/(.*)/?$ /index.php?p=search&date=$1 last;
+    rewrite ^/page/search/tags/(.*)/([0-9]+)/?$ /index.php?p=search&searchfields=tags&words=$1&page=$2 last;
+    rewrite ^/page/search/tags/(.*)/?$ /index.php?p=search&searchfields=tags&words=$1 last;
+    rewrite ^/page/search/(.*)/([0-9]+)/?$ /index.php?p=search&words=$1&page=$2 last;
+    rewrite ^/page/search/(.*)/?$ /index.php?p=search&words=$1 last;
 }
 
 # News
 location /news {
-    rewrite ^/news/?$ /photos/index.php?p=news last;
-    rewrite ^/news/([0-9]+)/?$ /photos/index.php?p=news&page=$1 last;
-    rewrite ^/news/category/(.*)/([0-9]+)/?$ /photos/index.php?p=news&category=$1&page=$2 last;
-    rewrite ^/news/category/(.*)/?$ /photos/index.php?p=news&category=$1 last;
-    rewrite ^/news/archive/(.*)/([0-9]+)/?$ /photos/index.php?p=news&date=$1&page=$2 last;
-    rewrite ^/news/archive/(.*)/?$ /photos/index.php?p=news&date=$1 last;
-    rewrite ^/news/(.*)/?$ /photos/index.php?p=news&title=$1 last;
+    rewrite ^/news/?$ /index.php?p=news last;
+    rewrite ^/news/([0-9]+)/?$ /index.php?p=news&page=$1 last;
+    rewrite ^/news/category/(.*)/([0-9]+)/?$ /index.php?p=news&category=$1&page=$2 last;
+    rewrite ^/news/category/(.*)/?$ /index.php?p=news&category=$1 last;
+    rewrite ^/news/archive/(.*)/([0-9]+)/?$ /index.php?p=news&date=$1&page=$2 last;
+    rewrite ^/news/archive/(.*)/?$ /index.php?p=news&date=$1 last;
+    rewrite ^/news/(.*)/?$ /index.php?p=news&title=$1 last;
 }
 
 # Root
 location / {
     try_files $uri $uri/ @zenphoto;
-}
-
-# pass the PHP scripts to php-fpm server
-    # regex to split $uri to $fastcgi_script_name and $fastcgi_path
-    # Check that the PHP script exists before passing it
-    # Bypass the fact that try_files resets $fastcgi_path_info
-    # see: https://trac.nginx.org/nginx/ticket/321
-#location ~ \.php$ {
-#    try_files $uri =404;
-#    fastcgi_split_path_info ^(.+\.php)(/.+)$;
-#    include fastcgi_params;
-#    fastcgi_read_timeout 120;        
-#    fastcgi_param SCRIPT_FILENAME $document_root/$fastcgi_script_name;
-#    fastcgi_index index.php;
-#    fastcgi_pass php5_fpm;
-#}
-
-location ~ \.php$ {
-    fastcgi_intercept_errors on;
-    fastcgi_split_path_info ^(.+\.php)(/.+)$;
-    try_files $fastcgi_script_name =404;
-    set $path_info $fastcgi_path_info;
-    fastcgi_param PATH_INFO $path_info;
-    fastcgi_read_timeout 1200;
-    fastcgi_buffering off;
-    fastcgi_index index.php;
-    include /etc/nginx/fastcgi.conf; 
-    fastcgi_pass php5_fpm;
-}
-
-location ~ /\. {
-    deny  all;
-}
-
-location ~ /(libraries|templates) {
-    deny all;
 }

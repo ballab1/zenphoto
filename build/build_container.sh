@@ -28,7 +28,7 @@ declare -r ZEN_SHA256="ecd0efac214e60be9ed339977d7be946a34f6eeb5fe2adc6c20fa42bd
 
 #directories
 declare -r WWW=/var/www
-declare -r ZEN_DIR="${WWW}/photos"
+declare -r ZEN_DIR="${WWW}"
 
 #  groups/users
 declare www_user=${www_user:-'www-data'}
