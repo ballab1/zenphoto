@@ -1,5 +1,6 @@
 FROM alpine:3.6
 
+ARG TZ="America/New_York"
 ARG DBUSER="${CFG_MYSQL_USER}"
 ARG DBPASS="${CFG_MYSQL_PASSWORD}"
 ARG DBHOST='mysql'
