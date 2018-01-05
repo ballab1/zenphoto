@@ -246,9 +246,13 @@ function setPermissions()
     
     cd "${ZEN_DIR}/zp-data"
     chmod 444 .htaccess
-    chmod 600 security.log
-    chmod 600 zenphoto.cfg.*
-    
+    chmod 600 setup.log security.log zenphoto.cfg.*
+    chmod 444 charset_* *.jpg
+#    cd "${ZEN_DIR}/zp-core/setup"
+#    while read fl; do
+#        mv $fl $fl.xxx
+#        chmod 644 $fl.xxx
+#    done < <(ls -1 *.php)
 
 www_user='nobody'
 www_group='nobody'
