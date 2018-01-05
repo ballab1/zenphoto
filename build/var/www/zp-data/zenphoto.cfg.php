@@ -54,12 +54,12 @@ $conf['UTF-8'] = true;
 //                      Images within an external folder are not visible to web
 //                      browsers, so certain features such as flash players cannot
 //                      display them
-$conf['album_folder'] = '/albums/';
+$conf['album_folder'] = '/albums';
 $conf['album_folder_class'] = 'std';
 
 // Server Protocol
 
-$conf['server_protocol'] = "http";
+$conf['server_protocol'] = "https";
 
 // Change this to "https" if you use an HTTPS server (a "https://..." url)
 // Otherwise you should leave it at "http"
@@ -70,10 +70,10 @@ $conf['server_protocol'] = "http";
 // for further documentation see the rewrite.php doc block
 //
 $conf['special_pages'] = array(
-    'page'=> array('define'=>'_PAGE_', 'rewrite'=>'page'),
-    'search'=> array('define'=>'_SEARCH_', 'rewrite'=>'_PAGE_/search'),
-    'archive'=> array('define'=>'_ARCHIVE_', 'rewrite'=>'_PAGE_/archive'),
-    'tags'=> array('define'=>'_TAGS_', 'rewrite'=>'_SEARCH_/tags')
+      'page'=> array('define'=>'_PAGE_', 'rewrite'=>'page'),
+      'search'=> array('define'=>'_SEARCH_', 'rewrite'=>'_PAGE_/search'),
+      'archive'=> array('define'=>'_ARCHIVE_', 'rewrite'=>'_PAGE_/archive'),
+      'tags'=> array('define'=>'_TAGS_', 'rewrite'=>'_SEARCH_/tags')
                                                 );
 //
 ////////////////////////////////////////////////////////////////////////////////
@@ -85,8 +85,8 @@ $conf['special_pages'] = array(
 // on your server, which might work better on some setups.
 ////////////////////////////////////////////////////////////////////////////////
 
-//define('WEBPATH', '/');
-//define('SERVERPATH', '/var/www');
+define('WEBPATH', '/photos');
+define('SERVERPATH', '/var/www');
 
 ////////////////////////////////////////////////////////////////////////////////
 /** Do not edit below this line. **/
