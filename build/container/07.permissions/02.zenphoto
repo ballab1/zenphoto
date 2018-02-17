@@ -1,0 +1,20 @@
+#!/bin/bash
+
+source "${TOOLS}/04.downloads/01.ZENPHOTO" 
+
+find "${WWW}" -type d -exec chmod 755 {} \;
+find "${WWW}" -type f -exec chmod 444 {} \;
+    
+cd "${ZEN_DIR}/zp-data"
+chmod 444 .htaccess
+chmod 600 setup.log security.log zenphoto.cfg.*
+chmod 444 charset_* *.jpg
+
+#cd "${ZEN_DIR}/zp-core/setup"
+#while read fl; do
+#    mv $fl $fl.xxx
+#    chmod 644 $fl.xxx
+#done < <(ls -1 *.php)
+
+chown nobody:nobody -R "${WWW}"
+chown nobody:nobody -R /var/log

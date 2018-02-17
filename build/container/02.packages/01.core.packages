@@ -1,0 +1,2 @@
+# core Packages
+apk add --no-cache curl findutils libgd libxml2 mysql-client nginx openssh-client shadow sudo supervisor ttf-dejavu unzip util-linux zlib
