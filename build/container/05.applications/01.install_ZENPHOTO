@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source "${TOOLS}/04.downloads/01.ZENPHOTO"
+
+tar xzf "${ZENPHOTO['file']}"
+cd "zenphoto-zenphoto-${ZENPHOTO['version']}"
+mkdir -p "${ZEN_DIR}"
+mv -f * "${ZEN_DIR}/"
+
+[[ -f "${ZEN_DIR}/LICENSE" ]]           && rm "${ZEN_DIR}/LICENSE"
+[[ -f "${ZEN_DIR}/README.md" ]]         && rm "${ZEN_DIR}/README.md"
+[[ -f "${ZEN_DIR}/contributing.md" ]]   && rm "${ZEN_DIR}/contributing.md" 

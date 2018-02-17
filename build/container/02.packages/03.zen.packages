@@ -1,0 +1,2 @@
+# nagios packages
+apk add --no-cache freetype gd jpeg libjpeg libpng openssl rsync

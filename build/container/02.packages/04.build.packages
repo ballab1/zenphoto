@@ -1,0 +1,2 @@
+# build Packages
+apk add --no-cache --virtual .buildDepedencies alpine-sdk php5-dev pcre-dev build-base autoconf libtool bash-completion busybox file git gnutls-utils libxml2-dev linux-headers musl-utils
