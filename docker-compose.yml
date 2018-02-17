@@ -1,32 +1,32 @@
-version: '3.1'
+version: '3.5'
 
 services:
     zen:
         build:
-            context: ../zen
             args:
-                TZ: "America/New_York"  
-                DBUSER: ${CFG_MYSQL_USER}
-                DBPASS: ${CFG_MYSQL_PASSWORD}
+                CONTAINER_VERSION: 1.0.0
+                FROM_BASE: base_container:20180214
                 DBHOST: 'mysql'
-        image: zenphoto:20171222
+                DBPASS: ${CFG_MYSQL_PASSWORD}
+                DBUSER: ${CFG_MYSQL_USER}
+            context: .
         container_name: zen
-        hostname: zen
-#        restart: unless-stopped
-        links:
-            - mysql
         environment:
-            TZ: "America/New_York"
-            DBUSER: ${CFG_MYSQL_USER}
+            DBHOST: mysql
             DBPASS: ${CFG_MYSQL_PASSWORD}
-            DBHOST: 'mysql'
-        volumes:
-            - ../zen/vols/photos:/var/www/albums
-            - ../zen/vols/log:/var/log 
-        ports:
-            - 8004:80
+            DBUSER: ${CFG_MYSQL_USER}
+        hostname: zen
+        image: zenphoto:20180217
+#        links:
+#            - mysql
         logging:
             driver: "json-file"
             options:
                 max-size: "10m"
                 max-file: "3"
+        ports:
+            - 8004:80
+#        restart: unless-stopped
+        volumes:
+            - ../zen/vols/log:/var/log 
+            - ../zen/vols/photos:/var/www/albums
