@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "${TOOLS}/04.downloads/01.ZENPHOTO"
+source "${CBF['action']}/03.downloads/01.ZENPHOTO"
 
 tar xzf "${ZENPHOTO['file']}"
 cd "zenphoto-zenphoto-${ZENPHOTO['version']}"

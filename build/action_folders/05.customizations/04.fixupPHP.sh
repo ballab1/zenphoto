@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source "${TOOLS}/php_definitions"
+source "${CBF['action']}/php_definitions"
 
 [ -d "${SESSIONS_DIR}" ]           || mkdir -p "${SESSIONS_DIR}"
 [ -d "$RUN_DIR" ]                  || mkdir -p "$RUN_DIR"
