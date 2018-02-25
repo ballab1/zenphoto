@@ -1,2 +1,5 @@
 # nagios packages
-apk add --no-cache freetype gd jpeg libjpeg libpng openssl rsync
+
+if [ "${CBF['os_id']}" = 'alpine' ]; then
+    apk add --no-cache freetype gd jpeg libjpeg libpng openssl rsync
+fi
