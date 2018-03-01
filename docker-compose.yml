@@ -4,12 +4,15 @@ services:
     zen:
         build:
             args:
-                CONTAINER_VERSION: 1.0.0
+                CONTAINER_NAME: zen
+                CONTAINER_VERSION: 1.0.1
+                DEBUG_TRACE: 0
                 FROM_BASE: base_container:20180214
-                DBHOST: 'mysql'
+                DBHOST: mysql
                 DBPASS: ${CFG_MYSQL_PASSWORD}
                 DBUSER: ${CFG_MYSQL_USER}
             context: .
+            dockerfile: Dockerfile
         container_name: zen
         environment:
             DBHOST: mysql
@@ -20,13 +23,13 @@ services:
 #        links:
 #            - mysql
         logging:
-            driver: "json-file"
+            driver: json-file
             options:
-                max-size: "10m"
-                max-file: "3"
+                max-size: 10m
+                max-file: 3
         ports:
             - 8004:80
 #        restart: unless-stopped
         volumes:
-            - ../zen/vols/log:/var/log 
-            - ../zen/vols/photos:/var/www/albums
+            - ./vols/log:/var/log 
+            - ./vols/photos:/var/www/albums
