@@ -7,7 +7,7 @@ services:
                 CONTAINER_NAME: zen
                 CONTAINER_VERSION: 1.0.1
                 DEBUG_TRACE: 0
-                FROM_BASE: base_container:20180214
+                FROM_BASE: base_container:20180311
                 DBHOST: mysql
                 DBPASS: ${CFG_MYSQL_PASSWORD}
                 DBUSER: ${CFG_MYSQL_USER}
@@ -19,14 +19,14 @@ services:
             DBPASS: ${CFG_MYSQL_PASSWORD}
             DBUSER: ${CFG_MYSQL_USER}
         hostname: zen
-        image: zenphoto:20180217
+        image: zenphoto:20180311
 #        links:
 #            - mysql
         logging:
             driver: json-file
             options:
-                max-size: 10m
-                max-file: 3
+                max-file: "3"
+                max-size: "10m"
         ports:
             - 8004:80
 #        restart: unless-stopped

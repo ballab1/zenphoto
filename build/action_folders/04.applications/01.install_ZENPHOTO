@@ -1,7 +1,5 @@
 #!/bin/bash
 
-source "${CBF['action']}/03.downloads/01.ZENPHOTO"
-
 tar xzf "${ZENPHOTO['file']}"
 cd "zenphoto-zenphoto-${ZENPHOTO['version']}"
 mkdir -p "${ZEN_DIR}"
