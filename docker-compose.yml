@@ -5,9 +5,9 @@ services:
         build:
             args:
                 CONTAINER_NAME: zen
-                CONTAINER_VERSION: 1.0.1
+                CONTAINER_VERSION: 1.0.6
                 DEBUG_TRACE: 0
-                FROM_BASE: base_container:20180311
+                FROM_BASE: base_container:20180314
                 DBHOST: mysql
                 DBPASS: ${CFG_MYSQL_PASSWORD}
                 DBUSER: ${CFG_MYSQL_USER}
@@ -19,7 +19,7 @@ services:
             DBPASS: ${CFG_MYSQL_PASSWORD}
             DBUSER: ${CFG_MYSQL_USER}
         hostname: zen
-        image: zenphoto:20180311
+        image: zenphoto:20180314
 #        links:
 #            - mysql
         logging:

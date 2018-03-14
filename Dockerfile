@@ -1,4 +1,4 @@
-ARG FROM_BASE=base_container:20180311
+ARG FROM_BASE=base_container:20180314
 FROM $FROM_BASE
 
 # name and version of this docker image
@@ -24,7 +24,7 @@ COPY build /tmp/
 RUN set -o verbose \
     && chmod u+rwx /tmp/build.sh \
     && /tmp/build.sh "$CONTAINER_NAME"
-RUN [[ $DEBUG_TRACE != 0 ]] || rm -rf /tmp/* 
+RUN [ $DEBUG_TRACE != 0 ] || rm -rf /tmp/* 
 
 
 #USER $zen_user
