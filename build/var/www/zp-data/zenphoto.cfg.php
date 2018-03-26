@@ -26,9 +26,9 @@ SERVER path. For these cases you will need to implement the path overrides below
 $conf['db_software'] = "PDO_MySQL";
 /** for historical reasons these fields reference mysql even though the database **
  ** might be a different software                                                **/
-$conf['mysql_user'] = getenv('DBUSER');
-$conf['mysql_pass'] = getenv('DBPASS');
-$conf['mysql_host'] = getenv('DBHOST');
+$conf['mysql_user'] = getenv('ZEN_USER');
+$conf['mysql_pass'] = getenv('ZEN_PASS');
+$conf['mysql_host'] = getenv('ZEN_HOST');
 $conf['mysql_database'] = "zen";
 // If you're sharing the database with other tables, use a prefix to be safe.
 $conf['mysql_prefix'] = "zen_";

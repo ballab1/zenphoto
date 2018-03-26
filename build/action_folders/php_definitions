@@ -1,3 +1,0 @@
-
-export SESSIONS_DIR=/sessions
-export RUN_DIR=/var/run/php

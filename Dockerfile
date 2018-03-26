@@ -1,4 +1,4 @@
-ARG FROM_BASE=base_container:20180314
+ARG FROM_BASE=supervisord:20180314
 FROM $FROM_BASE
 
 # name and version of this docker image
@@ -12,9 +12,9 @@ LABEL org_name=$CONTAINER_NAME \
 ARG DEBUG_TRACE=0
 
 
-ARG DBUSER="${CFG_MYSQL_USER}"
-ARG DBPASS="${CFG_MYSQL_PASSWORD}"
-ARG DBHOST='mysql'
+ARG ZEN_HOST=mysql
+ARG ZEN_PASS=${CFG_PASS}
+ARG ZEN_USER=${CFG_USER}
 
 
 # Add configuration and customizations
