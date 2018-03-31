@@ -11,14 +11,16 @@ LABEL org_name=$CONTAINER_NAME \
 # set to non zero for the framework to show verbose action scripts
 ARG DEBUG_TRACE=0
 
+# Add CBF, configuration and customizations
+ARG CBF_VERSION=${CBF_VERSION:-v2.0}
+ADD "https://github.com/ballab1/container_build_framework/archive/${CBF_VERSION}.tar.gz" /tmp/
+COPY build /tmp/
+
 
 ARG ZEN_HOST=mysql
 ARG ZEN_PASS=${CFG_PASS}
 ARG ZEN_USER=${CFG_USER}
 
-
-# Add configuration and customizations
-COPY build /tmp/
 
 # build content
 RUN set -o verbose \
