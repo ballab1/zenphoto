@@ -11,5 +11,5 @@ if [ ! -d "$cbf_dir" ]; then
     cbf_dir="$( ls -d container_build_framework-* )"
     [ "$cbf_dir" ] || exit 1
 fi
-
+echo "loading framework from ${cbf_dir}"
 source "${cbf_dir}/bin/build.sh" "$@"

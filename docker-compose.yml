@@ -4,6 +4,7 @@ services:
     zen:
         build:
             args:
+                CBF_VERSION: ${CBF_VERSION:-dev}
                 CONTAINER_NAME: zen
                 CONTAINER_VERSION: 1.0.6
                 DEBUG_TRACE: 0
