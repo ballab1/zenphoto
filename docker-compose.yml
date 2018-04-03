@@ -8,11 +8,12 @@ services:
                 CONTAINER_NAME: zen
                 CONTAINER_VERSION: 1.0.6
                 DEBUG_TRACE: 0
-                FROM_BASE: supervisord:20180314
+                FROM_BASE: php5:latest
             cache_from:
 		- alpine:3.6
-		- base_container:20180314
-		- supervisord:20180314
+		- base_container:latest
+		- supervisord:latest
+		- php5:latest
             context: .
             dockerfile: Dockerfile
         container_name: zen
@@ -21,7 +22,7 @@ services:
             ZEN_PASS: ${CFG_PASS}
             ZEN_USER: ${CFG_USER}
         hostname: zen
-        image: zenphoto:20180314
+        image: zenphoto:latest
 #        links:
 #            - mysql
         logging:

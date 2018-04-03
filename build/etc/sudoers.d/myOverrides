@@ -1,2 +1,0 @@
-
-#nobody ALL=(ALL) NOPASSWD: /usr/local/nagios/bin/deploy_local.sh
