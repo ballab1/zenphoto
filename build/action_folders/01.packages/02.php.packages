@@ -1,5 +1,0 @@
-# php packages
-
-if [ "${CBF['os_id']}" = 'alpine' ]; then
-    apk add --no-cache php5-fpm php5-ctype php5-common php5-dom php5-gettext php5-iconv php5-gd php5-json php5-mysql php5-posix php5-sockets php5-xml php5-xmlreader php5-xmlrpc php5-xsl php5-zip
-fi
