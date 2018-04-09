@@ -1,0 +1,12 @@
+# zen core Packages
+
+PKGS='curl \
+      findutils \
+      libgd \
+      mysql-client \
+      openssh-client \
+      sudo \
+      ttf-dejavu \
+      unzip \
+      util-linux'
+ 

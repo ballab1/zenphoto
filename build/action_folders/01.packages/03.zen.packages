@@ -1,9 +1,0 @@
-# zen core packages
-
-# zen php packages
-
-if [ "${CBF['os_id']}" = 'alpine' ]; then
-    declare PKGS='gd jpeg php5-gd php5-gettext rsync'
-    package.checkIfInstalled "$PKGS"
-    apk add --no-cache $PKGS
-fi 
