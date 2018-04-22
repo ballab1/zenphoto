@@ -5,4 +5,4 @@ declare -ar env_zen=(
     'ZEN_DIR="${WWW:-/var/www}"'
 )
 
-lib.updateRuntimeEnvironment "${env_zen[*]}" 
+crf.updateRuntimeEnvironment "${env_zen[*]}" 

@@ -9,7 +9,7 @@ LABEL org_name=$CONTAINER_NAME \
       version=$CONTAINER_VERSION 
 
 # Specify CBF version to use with our configuration and customizations
-ARG CBF_VERSION=${CBF_VERSION:-v2.0}
+ARG CBF_VERSION=${CBF_VERSION:-v3.0}
 # include our project files
 COPY build /tmp/
 # set to non zero for the framework to show verbose action scripts
