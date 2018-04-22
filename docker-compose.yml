@@ -7,7 +7,6 @@ services:
                 CBF_VERSION: ${CBF_VERSION:-dev}
                 CONTAINER_NAME: zen
                 CONTAINER_VERSION: 1.0.6
-                DEBUG_TRACE: 0
                 FROM_BASE: php5:latest
             cache_from:
 		- alpine:3.6
@@ -18,6 +17,7 @@ services:
             dockerfile: Dockerfile
         container_name: zen
         environment:
+            DEBUG_TRACE: ${DEBUG_TRACE:-0}
             ZEN_HOST: mysql
             ZEN_PASS: ${CFG_PASS}
             ZEN_USER: ${CFG_USER}

@@ -1,7 +1,0 @@
-# zen build packages
-
-if [ "${CBF['os_id']}" = 'alpine' ]; then
-    declare PKGS='alpine-sdk php5-dev pcre-dev build-base autoconf libtool bash-completion file git gnutls-utils libxml2-dev linux-headers'
-    package.checkIfInstalled "$PKGS"
-    apk add --no-cache --virtual .buildDepedencies $PKGS
-fi 

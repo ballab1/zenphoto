@@ -1,7 +1,0 @@
-# zen core Packages
-
-if [ "${CBF['os_id']}" = 'alpine' ]; then
-    declare PKGS='curl findutils libgd mysql-client openssh-client sudo ttf-dejavu unzip util-linux'
-    package.checkIfInstalled "$PKGS"
-    apk add --no-cache $PKGS
-fi 
