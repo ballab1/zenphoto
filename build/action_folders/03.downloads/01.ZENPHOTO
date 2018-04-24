@@ -1,11 +1,8 @@
+#!/bin/bash
 
-declare -A ZENPHOTO=()
-
-ZENPHOTO['version']=${ZEN_VERSION:-1.4.14}
-ZENPHOTO['file']="/tmp/zenphoto-${ZENPHOTO['version']}.tar.gz"
-ZENPHOTO['url']="https://github.com/zenphoto/zenphoto/archive/zenphoto-${ZENPHOTO['version']}.tar.gz"
-ZENPHOTO['sha256']="ecd0efac214e60be9ed339977d7be946a34f6eeb5fe2adc6c20fa42bd450ebff"
-
-#directories
-declare -rx WWW=/var/www
-declare -rx ZEN_DIR="${WWW}"
+declare -A ZENPHOTO=(
+    ['version']=${ZEN_VERSION:-1.4.14}
+    ['file']="/tmp/zenphoto-${ZENPHOTO['version']}.tar.gz"
+    ['url']="https://github.com/zenphoto/zenphoto/archive/zenphoto-${ZENPHOTO['version']}.tar.gz"
+    ['sha256']="ecd0efac214e60be9ed339977d7be946a34f6eeb5fe2adc6c20fa42bd450ebff"
+)

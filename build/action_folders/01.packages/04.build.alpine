@@ -1,0 +1,15 @@
+# zen build packages
+
+declare -a OPTS=( '--virtual' '.buildDependencies' )
+declare -a PKGS=( alpine-sdk
+                  autoconf
+                  bash-completion
+                  build-base
+                  file
+                  git
+                  gnutls-utils
+                  libtool
+                  libxml2-dev
+                  linux-headers
+                  pcre-dev
+                  php5-dev )

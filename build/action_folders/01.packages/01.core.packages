@@ -1,5 +1,0 @@
-# core Packages
-
-if [ "${CBF['os_id']}" = 'alpine' ]; then
-    apk add --no-cache curl findutils libgd libxml2 mysql-client nginx openssh-client shadow sudo supervisor ttf-dejavu unzip util-linux zlib
-fi

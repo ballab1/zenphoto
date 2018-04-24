@@ -1,3 +1,0 @@
-#!/bin/bash
-
-lib.copyFileToRuntimeEnvironment "${CBF['action']}/php_definitions"
