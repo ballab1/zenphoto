@@ -7,12 +7,12 @@ services:
                 CBF_VERSION: ${CBF_VERSION:-dev}
                 CONTAINER_NAME: zen
                 CONTAINER_VERSION: 1.0.6
-                FROM_BASE: php5:latest
+                FROM_BASE: php5:${CONTAINER_TAG:-latest}
             cache_from:
 		- alpine:3.6
-		- base_container:latest
-		- supervisord:latest
-		- php5:latest
+		- base_container:${CONTAINER_TAG:-latest}
+		- supervisord:${CONTAINER_TAG:-latest}
+		- php5:${CONTAINER_TAG:-latest}
             context: .
             dockerfile: Dockerfile
         container_name: zen
@@ -22,7 +22,7 @@ services:
             ZEN_PASS: ${CFG_PASS}
             ZEN_USER: ${CFG_USER}
         hostname: zen
-        image: zenphoto:latest
+        image: zenphoto:${CONTAINER_TAG:-latest}
 #        links:
 #            - mysql
         logging:
