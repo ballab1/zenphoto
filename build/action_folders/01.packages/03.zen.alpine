@@ -2,7 +2,6 @@
 
 declare -a PKGS=( gd
                   jpeg
-                  php5-gd
                   php5-gettext
                   rsync )
  

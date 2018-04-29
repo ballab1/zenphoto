@@ -23,7 +23,7 @@ SERVER path. For these cases you will need to implement the path overrides below
 ////////////////////////////////////////////////////////////////////////////////
 // Database Information
 ////////////////////////////////////////////////////////////////////////////////
-$conf['db_software'] = "PDO_MySQL";
+$conf['db_software'] = "MySQLi";
 /** for historical reasons these fields reference mysql even though the database **
  ** might be a different software                                                **/
 $conf['mysql_user'] = getenv('ZEN_USER');

@@ -1,4 +1,4 @@
-ARG FROM_BASE=supervisord:20180314
+ARG FROM_BASE=php5:20180314
 FROM $FROM_BASE
 
 # name and version of this docker image

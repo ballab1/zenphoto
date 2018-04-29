@@ -1,5 +1,11 @@
 #!/bin/bash
 
+: ${WWW_UID:?"Environment variable 'WWW_UID' not defined in '${BASH_SOURCE[0]}'"}
+: ${WWW_GID:?"Environment variable 'WWW_GID' not defined in '${BASH_SOURCE[0]}'"}
+
+chown "${WWW_UID}:$WWW_GID" -R /var/log 
+chown "${WWW_UID}:$WWW_GID" -R "${WWW}"
+
 find "${WWW}" -type d -exec chmod 755 {} \;
 find "${WWW}" -type f -exec chmod 444 {} \;
     
@@ -10,12 +16,4 @@ done
 for file in  setup.log security.log zenphoto.cfg.* ; do
     [ ! -e "$file" ] || chmod 600 "$file"
 done    
-
-#cd "${ZEN_DIR}/zp-core/setup"
-#while read fl; do
-#    mv $fl $fl.xxx
-#    chmod 644 $fl.xxx
-#done < <(ls -1 *.php)
-
-chown nobody:nobody -R "${WWW}"
-chown nobody:nobody -R /var/log
+chmod 755 "${ZEN_DIR}/zp-data"

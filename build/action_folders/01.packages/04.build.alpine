@@ -10,6 +10,4 @@ declare -a PKGS=( alpine-sdk
                   gnutls-utils
                   libtool
                   libxml2-dev
-                  linux-headers
-                  pcre-dev
-                  php5-dev )
+                  linux-headers )
