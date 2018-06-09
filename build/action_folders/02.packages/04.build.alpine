@@ -9,5 +9,6 @@ declare -a PKGS=( alpine-sdk
                   git
                   gnutls-utils
                   libtool
-                  libxml2-dev
-                  linux-headers )
+#                  libxml2-dev
+#                  linux-headers 
+                 )

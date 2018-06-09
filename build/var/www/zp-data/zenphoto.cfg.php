@@ -89,6 +89,8 @@ define('WEBPATH', '/photos');
 define('SERVERPATH', '/var/www');
 
 ////////////////////////////////////////////////////////////////////////////////
+$conf['CHMOD'] = 0444;
+if (!defined('CHMOD_VALUE')) { define('CHMOD_VALUE', $conf['CHMOD']); }
 /** Do not edit below this line. **/
 /**********************************/
 $_zp_conf_vars = $conf;

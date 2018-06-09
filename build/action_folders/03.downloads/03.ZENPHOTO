@@ -1,9 +1,0 @@
-#!/bin/bash
-
-declare -A ZENPHOTO=(
-    ['version']=${ZEN_VERSION:-1.4.14}
-    ['dir']="/tmp/zenphoto-zenphoto-${ZENPHOTO['version']}"
-    ['file']="/tmp/zenphoto-${ZENPHOTO['version']}.tar.gz"
-    ['url']="https://github.com/zenphoto/zenphoto/archive/zenphoto-${ZENPHOTO['version']}.tar.gz"
-    ['sha256']="ecd0efac214e60be9ed339977d7be946a34f6eeb5fe2adc6c20fa42bd450ebff"
-)
