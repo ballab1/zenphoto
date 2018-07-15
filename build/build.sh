@@ -13,20 +13,18 @@ echo '= Variables used ===================================='
 echo "    CBF_VERSION: .${CBF_VERSION}."
 echo '=====================================================' 
 
-# ensure we have bash support
-if  [ -z "$(which bash)" ]; then
-    if [ -e /etc/os-release ] && [ "$(grep -c 'ID=alpine' /etc/os-release 2>/dev/null)" -ne 0 ]; then
+if [ -e /etc/os-release ] && [ "$(grep -c 'ID=alpine' /etc/os-release 2>/dev/null)" -ne 0 ]; then
+    # ensure we have bash support (on Alpine)
+    if  [ -z "$(which bash)" ]; then
         apk update
         apk add --no-cache bash ca-certificates openssl 
-    else
-        die 'No framework directory located'
     fi
 fi
 
 cd /tmp
 cbf_dir=/tmp/container_build_framework
 
-if [ ! -d "$cbf_dir" ] && [ "${CBF_VERSION}" ]; then
+if [ ! -d "$cbf_dir" ] && [ "$CBF_VERSION" ]; then
     echo "Downloading CBF:$CBF_VERSION from github"
     # since no CBF directory located, attempt to download CBF based on specified verion
     CBF_URL="https://github.com/ballab1/container_build_framework/archive/${CBF_VERSION}.tar.gz"
