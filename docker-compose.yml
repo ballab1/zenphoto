@@ -6,7 +6,6 @@ services:
             args:
                 CBF_VERSION: "${CBF_VERSION:-}"
                 CONTAINER_NAME: zen
-                CONTAINER_VERSION: ${CONTAINER_VERSION:-3.0.0}
                 FROM_BASE: ${DOCKER_REGISTRY:-}php7:${CONTAINER_TAG:-latest}
             cache_from:
                 - ${DOCKER_REGISTRY:-}alpine:3.8
@@ -19,12 +18,20 @@ services:
         environment:
             DEBUG_TRACE: ${DEBUG_TRACE:-0}
             SUPERVISORD_PASS: $CFG_PASS
-            SUPERVISORD_USER: $CFG_USER 
+            SUPERVISORD_USER: $CFG_USER
             ZEN_HOST: mysql
             ZEN_PASS: $CFG_PASS
             ZEN_USER: $CFG_USER
         hostname: zen
         image: ${DOCKER_REGISTRY:-}zenphoto:${CONTAINER_TAG:-latest}
+        labels:
+            container.fingerprint: $CONTAINER_FINGERPRINT
+            container.git.branch: $CONTAINER_GIT_BRANCH
+            container.git.commit: $CONTAINER_GIT_COMMIT
+            container.git.url: $CONTAINER_GIT_URL
+            container.origin: $CONTAINER_ORIGIN
+            container.original.name: zen
+            container.version: ${CONTAINER_VERSION:-3.0.0}
 #        links:
 #            - mysql
         logging:
@@ -36,5 +43,5 @@ services:
             - 8004:80
 #        restart: unless-stopped
         volumes:
-            - ./vols/log:/var/log 
+            - ./vols/log:/var/log
             - ./vols/photos:/var/www/albums
