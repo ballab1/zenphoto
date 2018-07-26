@@ -18,6 +18,10 @@ ARG ZEN_HOST=mysql
 ARG ZEN_PASS=${CFG_PASS}
 ARG ZEN_USER=${CFG_USER}
 
+# postgres version being bundled in this docker image
+ARG ZEN_VERSION=${ZEN_VERSION:-1.5}
+LABEL zenphoto.version=$ZEN_VERSION  
+
 
 # build content
 RUN set -o verbose \
