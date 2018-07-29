@@ -20,7 +20,7 @@ services:
                 container.git.commit: $CONTAINER_GIT_COMMIT
                 container.git.url: $CONTAINER_GIT_URL
                 container.origin: $CONTAINER_ORIGIN
-                container.original.name: zen
+                container.original.name: zenphoto
                 container.version: ${CONTAINER_VERSION:-3.0.0}
         container_name: zen
         environment:
