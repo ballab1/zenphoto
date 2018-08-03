@@ -15,6 +15,7 @@ services:
             context: .
             dockerfile: Dockerfile
             labels:
+                container.build.time: $CONTAINER_BUILD_TIME
                 container.fingerprint: $CONTAINER_FINGERPRINT
                 container.git.branch: $CONTAINER_GIT_BRANCH
                 container.git.commit: $CONTAINER_GIT_COMMIT
