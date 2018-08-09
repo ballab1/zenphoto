@@ -31,7 +31,7 @@ services:
             ZEN_PASS: $CFG_PASS
             ZEN_USER: $CFG_USER
         hostname: zen
-        image: ${DOCKER_REGISTRY:-}zenphoto:${CONTAINER_TAG:-latest}
+        image: ${DOCKER_REGISTRY:-}zenphoto/1.5:${CONTAINER_TAG:-latest}
 #        links:
 #            - mysql
         logging:
