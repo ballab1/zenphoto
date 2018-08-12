@@ -1,10 +1,10 @@
-ARG FROM_BASE=${DOCKER_REGISTRY:-}php7:${BASE_TAG:-latest}
+ARG FROM_BASE=${DOCKER_REGISTRY:-}php/7.2.8-r1:${BASE_TAG:-latest}
 FROM $FROM_BASE
 
 # name and version of this docker image
 ARG CONTAINER_NAME=zen
 # Specify CBF version to use with our configuration and customizations
-ARG CBF_VERSION="$CBF_VERSION"
+ARG CBF_VERSION
 
 # include our project files
 COPY build Dockerfile /tmp/
@@ -19,7 +19,7 @@ ARG ZEN_PASS=${CFG_PASS}
 ARG ZEN_USER=${CFG_USER}
 
 # postgres version being bundled in this docker image
-ARG ZEN_VERSION=${ZEN_VERSION:-1.5}
+ARG ZEN_VERSION=1.5
 LABEL zenphoto.version=$ZEN_VERSION  
 
 
