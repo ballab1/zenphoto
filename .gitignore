@@ -15,6 +15,9 @@
 *~
 .directory
 .Trash-*
+samples
+log
+logs
 vols/*
 vols-rw/*
 build/container_build_framework*
