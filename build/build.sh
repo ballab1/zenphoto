@@ -6,18 +6,18 @@ function die() {
 }
 
 echo '= Environment ======================================='
-printf "    %s\n" $(env | sort)
+printf '    %s\n' $(env | sort)
 echo '= Commandline Params ================================'
-printf "    %s\n" "$@"
+printf '    %s\n' "$@"
 echo '= Variables used ===================================='
 echo "    CBF_VERSION: .${CBF_VERSION}."
-echo '=====================================================' 
+echo '====================================================='
 
 if [ -e /etc/os-release ] && [ "$(grep -c 'ID=alpine' /etc/os-release 2>/dev/null)" -ne 0 ]; then
     # ensure we have bash support (on Alpine)
     if  [ -z "$(which bash)" ]; then
         apk update
-        apk add --no-cache bash ca-certificates openssl 
+        apk add --no-cache bash ca-certificates openssl
     fi
 fi
 
