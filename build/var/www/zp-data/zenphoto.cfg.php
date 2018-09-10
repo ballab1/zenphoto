@@ -27,7 +27,12 @@ $conf['db_software'] = "MySQLi";
 /** for historical reasons these fields reference mysql even though the database **
  ** might be a different software                                                **/
 $conf['mysql_user'] = getenv('ZEN_USER');
-$conf['mysql_pass'] = getenv('ZEN_PASS');
+if (getenv('ZEN_PASS') != NULL) {
+    $conf['mysql_pass'] = getenv('ZEN_PASS');
+}
+elseif (getenv('ZEN_PASS_FILE') != NULL) {
+    require '/var/www/zp-data/zenphoto.mysql.password.php';
+}
 $conf['mysql_host'] = getenv('ZEN_HOST');
 $conf['mysql_database'] = "zen";
 // If you're sharing the database with other tables, use a prefix to be safe.

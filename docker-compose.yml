@@ -4,21 +4,21 @@ services:
     zen:
         build:
             args:
-                CBF_VERSION: "${CBF_VERSION:-}"
+                CBF_VERSION: ${CBF_VERSION:-}
                 CONTAINER_NAME: zen
-                FROM_BASE: ${DOCKER_REGISTRY:-}php/7.2.8-r1:${BASE_TAG:-latest}
+                FROM_BASE: ${DOCKER_REGISTRY:-}${OS:-}php/7.2.8-r1:${BASE_TAG:-latest}
             cache_from:
-                - ${DOCKER_REGISTRY:-}alpine:3.8
-                - ${DOCKER_REGISTRY:-}base_container:${BASE_TAG:-latest}
-                - ${DOCKER_REGISTRY:-}supervisord:${BASE_TAG:-latest}
-                - ${DOCKER_REGISTRY:-}nginx_base/1.15.1:${BASE_TAG:-latest}
-                - ${DOCKER_REGISTRY:-}php/7.2.8-r1:${BASE_TAG:-latest}
+                - ${DOCKER_REGISTRY:-}${OS:-}alpine:3.8
+                - ${DOCKER_REGISTRY:-}${OS:-}base_container:${BASE_TAG:-latest}
+                - ${DOCKER_REGISTRY:-}${OS:-}supervisord:${BASE_TAG:-latest}
+                - ${DOCKER_REGISTRY:-}${OS:-}nginx_base/1.15.1:${BASE_TAG:-latest}
+                - ${DOCKER_REGISTRY:-}${OS:-}php/7.2.8-r1:${BASE_TAG:-latest}
             context: .
             dockerfile: Dockerfile
             labels:
                 container.build.time: $CONTAINER_BUILD_TIME
                 container.fingerprint: $CONTAINER_FINGERPRINT
-                container.git.branch: $CONTAINER_GIT_BRANCH
+                container.git.refs: $CONTAINER_GIT_REFS
                 container.git.commit: $CONTAINER_GIT_COMMIT
                 container.git.url: $CONTAINER_GIT_URL
                 container.origin: $CONTAINER_ORIGIN
@@ -26,13 +26,16 @@ services:
         container_name: zen
         environment:
             DEBUG_TRACE: ${DEBUG_TRACE:-0}
-            SUPERVISORD_PASS: $CFG_PASS
+            SUPERVISORD_PASS_FILE: /run/secrets/supervisord.pwd
             SUPERVISORD_USER: $CFG_USER
             ZEN_HOST: mysql
-            ZEN_PASS: $CFG_PASS
+            ZEN_PASS_FILE: /run/secrets/zenphoto.pwd
             ZEN_USER: $CFG_USER
+#            PWD_PROTECTED: 'true'
+#            WEB_USER_ID: $CFG_USER
+#            WEB_USER_PASS_FILE: /run/secrets/web_user.pwd
         hostname: zen
-        image: ${DOCKER_REGISTRY:-}zenphoto/1.5:${CONTAINER_TAG:-latest}
+        image: ${DOCKER_REGISTRY:-}${OS:-}zenphoto/1.5:${CONTAINER_TAG:-latest}
 #        links:
 #            - mysql
         logging:
@@ -43,6 +46,16 @@ services:
         ports:
             - 8004:80
 #        restart: unless-stopped
+        secrets:
+            - supervisord.pwd
+            - zenphoto.pwd
+#            - web_user.pwd
         volumes:
             - ./vols/log:/var/log
             - ./vols/photos:/var/www/albums
+
+secrets:
+   supervisord.pwd:
+     file: ~/.inf/secrets/bobb.password
+   zenphoto.pwd:
+     file: ~/.inf/secrets/bobb.password
