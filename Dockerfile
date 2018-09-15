@@ -1,4 +1,4 @@
-ARG FROM_BASE=${DOCKER_REGISTRY:-}php/7.2.8-r1:${BASE_TAG:-latest}
+ARG FROM_BASE=${DOCKER_REGISTRY:-}${OS:-}php/7.2.8-r1:${BASE_TAG:-latest}
 FROM $FROM_BASE
 
 # name and version of this docker image
