@@ -6,14 +6,14 @@ services:
             args:
                 CBF_VERSION: ${CBF_VERSION:-}
                 CONTAINER_NAME: zen
-                FROM_BASE: ${DOCKER_REGISTRY:-}${OS:-}php/${PHP7_VERSION:-7.2.8-r1}:${BASE_TAG:-latest}
+                FROM_BASE: ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}php/${PHP7_VERSION:-7.2.8-r1}:${BASE_TAG:-latest}
                 ZEN_VERSION: ${ZEN_VERSION:-1.5}
             cache_from:
-                - ${DOCKER_REGISTRY:-}${OS:-}alpine:3.8
-                - ${DOCKER_REGISTRY:-}${OS:-}base_container:${BASE_TAG:-latest}
-                - ${DOCKER_REGISTRY:-}${OS:-}supervisord:${BASE_TAG:-latest}
-                - ${DOCKER_REGISTRY:-}${OS:-}nginx_base/${NGINX_VERSION:-1.15.3}:${BASE_TAG:-latest}
-                - ${DOCKER_REGISTRY:-}${OS:-}php/${PHP7_VERSION:-7.2.8-r1}:${BASE_TAG:-latest}
+                - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}alpine:3.8
+                - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}base_container:${BASE_TAG:-latest}
+                - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}supervisord:${BASE_TAG:-latest}
+                - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}nginx_base/${NGINX_VERSION:-1.15.3}:${BASE_TAG:-latest}
+                - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}php/${PHP7_VERSION:-7.2.8-r1}:${BASE_TAG:-latest}
             context: .
             dockerfile: Dockerfile
             labels:
@@ -36,7 +36,7 @@ services:
 #            WEB_USER_ID: $CFG_USER
 #            WEB_USER_PASS_FILE: /run/secrets/web_user.pwd
         hostname: zen
-        image: ${DOCKER_REGISTRY:-}${OS:-}zenphoto/${ZEN_VERSION:-1.5}:${CONTAINER_TAG:-latest}
+        image: ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}zenphoto/${ZEN_VERSION:-1.5}:${CONTAINER_TAG:-latest}
 #        links:
 #            - mysql
         logging:
