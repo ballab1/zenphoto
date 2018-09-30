@@ -1,8 +1,16 @@
 #!/bin/sh
 
-function die() {
+die() {
     echo "$1"
     exit 1
+}
+
+osname() {
+    if [ -e /etc/os-release ]; then
+        cat /etc/os-release | grep -E '^ID=' 2>/dev/null | awk -F '=' '{print $2}'
+    else
+        echo mingw64
+    fi
 }
 
 echo '= Environment ======================================='
@@ -13,13 +21,32 @@ echo '= Variables used ===================================='
 echo "    CBF_VERSION: .${CBF_VERSION}."
 echo '====================================================='
 
-if [ -e /etc/os-release ] && [ "$(grep -c 'ID=alpine' /etc/os-release 2>/dev/null)" -ne 0 ]; then
-    # ensure we have bash support (on Alpine)
-    if  [ -z "$(which bash)" ]; then
-        apk update
-        apk add --no-cache bash ca-certificates openssl
-    fi
-fi
+case "$(osname)" in
+    alpine)
+        # ensure we have bash support
+        if [ -z "$(which bash)" ]; then
+            apk update
+            apk add --no-cache bash ca-certificates openssl
+        fi;;
+    centos)
+        # ensure we have wget support
+        if [ -z "$(which wget)" ]; then
+            yum update
+            yum install -y wget
+        fi;;
+    fedora)
+        # ensure we have wget support
+        if [ -z "$(which wget)" ]; then
+            dnf update
+            dnf install -y wget
+        fi;;
+    ubuntu)
+        # ensure we have wget support
+        if [ -z "$(which wget)" ]; then
+            apt-get update
+            apt-get install -y apt-utils wget
+        fi;;
+esac
 
 cd /tmp
 cbf_dir=/tmp/container_build_framework
@@ -34,11 +61,12 @@ elif [ "$CBF_VERSION" ]; then
     CBF_URL="https://github.com/ballab1/container_build_framework/archive/${CBF_VERSION}.tar.gz"
     echo "Downloading CBF:$CBF_VERSION from $CBF_URL"
 
-    wget --no-check-certificate --quiet --output-document="$CBF_TGZ" "$CBF_URL" || die "Failed to download $CBF_URL"
-    if type -f wget &> /dev/null ; then
+    if [ $(which wget) ]; then
         wget --no-check-certificate --quiet --output-document="$CBF_TGZ" "$CBF_URL" || die "Failed to download $CBF_URL"
-    elif type -f curl &> /dev/null ; then
+
+    elif [ $(which curl) ]; then
         curl --insecure --silent --output "$CBF_TGZ" "$CBF_URL" || die "Failed to download $CBF_URL"
+
     else
         die "Neither wget or curl is installed to download cbf from $CBF_URL"
     fi
