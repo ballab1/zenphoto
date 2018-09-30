@@ -12,7 +12,7 @@ services:
                 - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}alpine:3.8
                 - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}base_container:${BASE_TAG:-latest}
                 - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}supervisord:${BASE_TAG:-latest}
-                - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}nginx_base/${NGINX_VERSION:-1.15.3}:${BASE_TAG:-latest}
+                - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}nginx-base/${NGINX_VERSION:-1.15.3}:${BASE_TAG:-latest}
                 - ${DOCKER_REGISTRY:-}${CONTAINER_OS:-}php/${PHP7_VERSION:-7.2.8-r1}:${BASE_TAG:-latest}
             context: .
             dockerfile: Dockerfile
