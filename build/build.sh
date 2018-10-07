@@ -32,19 +32,19 @@ case "$(osname)" in
         # ensure we have wget support
         if [ -z "$(which wget)" ]; then
             yum update
-            yum install -y wget
+            yum install -y wget ca-certificates openssl
         fi;;
     fedora)
         # ensure we have wget support
         if [ -z "$(which wget)" ]; then
-            dnf update
-            dnf install -y wget
+            yum update
+            yum install -y wget ca-certificates openssl
         fi;;
     ubuntu)
         # ensure we have wget support
         if [ -z "$(which wget)" ]; then
             apt-get update
-            apt-get install -y apt-utils wget
+            apt-get install -y apt-utils wget ca-certificates openssl
         fi;;
 esac
 
