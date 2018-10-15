@@ -54,6 +54,7 @@ cbf_dir=/tmp/container_build_framework
 # check if we need to download CBF
 if [ -d "$cbf_dir" ]; then
     echo "Using local build version of CBF"
+    find /tmp -name 'C?F.properties' -delete
 
 elif [ "$CBF_VERSION" ]; then
     # since no CBF directory located, attempt to download CBF based on specified verion
@@ -72,7 +73,7 @@ elif [ "$CBF_VERSION" ]; then
     fi
 
     echo 'Unpacking downloaded copy of CBF'
-    tar -xzf "$CBF_TGZ" || die "Failed to unpack $CBF_TGZ"
+    tar --exclude 'C?F.properties' -xzf "$CBF_TGZ" || die "Failed to unpack $CBF_TGZ"
     cbf_dir="$( ls -d container_build_framework* 2>/dev/null )"
 
 else
@@ -81,7 +82,7 @@ else
     # setup pointer to archive from prior build
     CBF_TGZ=/usr/local/crf/cbf.tar.gz
     mkdir -p "$cbf_dir" || die 'Unable to unpack stashed CBF'
-    tar -xzf "$CBF_TGZ" -C "$cbf_dir" || die "Failed to unpack $CBF_TGZ"
+    tar --exclude 'C?F.properties'  -xzf "$CBF_TGZ" -C "$cbf_dir" || die "Failed to unpack $CBF_TGZ"
 fi
 
 

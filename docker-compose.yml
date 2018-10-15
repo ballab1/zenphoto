@@ -18,6 +18,7 @@ services:
             dockerfile: Dockerfile
             labels:
                 container.build.time: $CONTAINER_BUILD_TIME
+                container.cbf.version: $CBF_VERSION
                 container.fingerprint: $CONTAINER_FINGERPRINT
                 container.git.refs: $CONTAINER_GIT_REFS
                 container.git.commit: $CONTAINER_GIT_COMMIT
