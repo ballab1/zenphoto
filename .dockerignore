@@ -7,13 +7,13 @@
 .cbfProject
  
 #build files
-docker-compose.yml
+docker-compose.*
 bin/*
 vols*/*
-cbf/CRF.properties
-CBF.properties
-scanned.paths
-*.loaded
+**/CRF.properties
+**/CBF.properties
+**/scanned.paths
+**/*.loaded
 
 # Information files
 LICENSE

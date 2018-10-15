@@ -7,9 +7,9 @@ die() {
 
 osname() {
     if [ -e /etc/os-release ]; then
-        cat /etc/os-release | grep -E '^ID=' 2>/dev/null | awk -F '=' '{print $2}'
+        cat /etc/os-release | grep -E '^ID=' 2>/dev/null | awk -F '=' '{print $2}' | tr -d '"'
     else
-        echo mingw64
+        die 'Unsupported OS - no /etc/os-release detected.'
     fi
 }
 
@@ -24,28 +24,30 @@ echo '====================================================='
 case "$(osname)" in
     alpine)
         # ensure we have bash support
-        if [ -z "$(which bash)" ]; then
+        if [ -z "$(type -P bash)" ]; then
             apk update
             apk add --no-cache bash ca-certificates openssl
         fi;;
     centos)
         # ensure we have wget support
-        if [ -z "$(which wget)" ]; then
-            yum update
-            yum install -y wget ca-certificates openssl
+        if [ -z "$(type -P wget)" ]; then
+            yum update -y
+            yum install -y wget openssl
         fi;;
     fedora)
         # ensure we have wget support
-        if [ -z "$(which wget)" ]; then
-            yum update
-            yum install -y wget ca-certificates openssl
+        if [ -z "$(type -P wget)" ]; then
+            yum update -y
+            yum install -y wget findutils
         fi;;
     ubuntu)
         # ensure we have wget support
-        if [ -z "$(which wget)" ]; then
+        if [ "$(type wget)" = 'wget: not found' ]; then
             apt-get update
             apt-get install -y apt-utils wget ca-certificates openssl
         fi;;
+    *)
+        die "'$(osname)' is not supported at this time";;
 esac
 
 cd /tmp
@@ -62,10 +64,10 @@ elif [ "$CBF_VERSION" ]; then
     CBF_URL="https://github.com/ballab1/container_build_framework/archive/${CBF_VERSION}.tar.gz"
     echo "Downloading CBF:$CBF_VERSION from $CBF_URL"
 
-    if [ $(which wget) ]; then
+    if [ "$(type wget)" ]; then
         wget --no-check-certificate --quiet --output-document="$CBF_TGZ" "$CBF_URL" || die "Failed to download $CBF_URL"
 
-    elif [ $(which curl) ]; then
+    elif [ "$(type curl)" ]; then
         curl --insecure --silent --output "$CBF_TGZ" "$CBF_URL" || die "Failed to download $CBF_URL"
 
     else
