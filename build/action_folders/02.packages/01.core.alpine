@@ -1,0 +1,11 @@
+# zen core Packages
+
+declare -a PKGS=( findutils
+#                  libgd
+                  mysql-client
+                  openssh-client
+                  sudo
+                  ttf-dejavu
+                  unzip
+                  util-linux )
+ 

@@ -1,0 +1,5 @@
+Zenphoto Setup v1.4.14[f5b47da52f]: Wed, 13 Dec 2017 22:04:56 -0500
+Warn: zp-data security [is compromised] Zenphoto suggests you make the sensitive files in the zp-data folder accessable by owner only (permissions = 0600). 
+The file permissions for setup.log are 0644 which may allow unauthorized access.
+Completed system check
+Set Zenphoto default options
