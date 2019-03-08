@@ -1,0 +1,7 @@
+# zen core packages
+
+declare -a PKGS=( # gd
+                  jpeg
+                  php5-gettext
+                  rsync )
+ 

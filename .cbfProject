@@ -1,0 +1,3 @@
+[project]
+container_name=zenphoto_container
+friendly_name=zen

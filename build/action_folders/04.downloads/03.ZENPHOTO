@@ -1,0 +1,9 @@
+#!/bin/bash
+
+declare -A ZENPHOTO=()
+ZENPHOTO['version']=${ZEN_VERSION:?}
+ZENPHOTO['dir']="/tmp/zenphoto-${ZENPHOTO['version']}"
+ZENPHOTO['file']="/tmp/zenphoto-${ZENPHOTO['version']}.tar.gz"
+ZENPHOTO['url']="https://github.com/zenphoto/zenphoto/archive/v${ZENPHOTO['version']}.tar.gz"
+ZENPHOTO['sha256_1.5']="ec104f05fd7271163de88783964b37732760bf1dbf4d314be8fb5a3a7c6a5d97"
+ZENPHOTO['sha256']="${ZENPHOTO['sha256_'${ZENPHOTO['version']}]}" 

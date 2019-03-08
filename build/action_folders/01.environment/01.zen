@@ -1,0 +1,9 @@
+#!/bin/bash
+
+declare -ar env_zen=(
+    'WWW="${WWW:-/var/www}"'
+    'ZEN_DIR="${WWW:-/var/www}"'
+    "ZEN_VERSION=${ZEN_VERSION:?}"
+)
+
+crf.updateRuntimeEnvironment "${env_zen[@]}" 

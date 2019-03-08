@@ -1,0 +1,20 @@
+# Git files
+.git
+.gitattributes
+.gitignore
+.lfsconfig
+.cbfBlacklist
+.cbfProject
+
+#build files
+docker-compose.*
+bin/*
+vols*/*
+**/CRF.properties
+**/CBF.properties
+**/scanned.paths
+**/*.loaded
+
+# Information files
+LICENSE
+README.md
