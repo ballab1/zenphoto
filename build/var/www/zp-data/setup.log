@@ -1,5 +1,5 @@
-Zenphoto Setup v1.4.14[f5b47da52f]: Wed, 13 Dec 2017 22:04:56 -0500
-Warn: zp-data security [is compromised] Zenphoto suggests you make the sensitive files in the zp-data folder accessable by owner only (permissions = 0600). 
-The file permissions for setup.log are 0644 which may allow unauthorized access.
+Zenphoto Setup v1.5.1 : Sat, 30 Mar 2019 13:46:09 -0400
+Warn: PHP tidy support [is not present] tidy support is not critical but strongely recommended for properly truncating text containing HTML markup.
+Warn: Server seems to be nginx If you wish to create cruft-free URLs, you will need to configuring URL rewriting for NGINX servers. You can ignore this warning if you do not intend to set the mod_rewrite option.
 Completed system check
 Set Zenphoto default options
