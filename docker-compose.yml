@@ -27,6 +27,7 @@ services:
                 container.git.url: $CONTAINER_GIT_URL
                 container.origin: $CONTAINER_ORIGIN
                 container.original.name: zenphoto
+                container.parent: $CONTAINER_PARENT
                 version.cbf: $CBF_VERSION
         container_name: zen
         environment:
