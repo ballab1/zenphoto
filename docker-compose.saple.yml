@@ -32,7 +32,36 @@ services:
         container_name: zen
         environment:
             DEBUG_TRACE: ${DEBUG_TRACE:-0}
+            SUPERVISORD_PASS_FILE: /run/secrets/supervisord.pwd
+            SUPERVISORD_USER: $CFG_USER
             ZEN_HOST: mysql
+            ZEN_PASS_FILE: /run/secrets/zenphoto.pwd
+            ZEN_USER: $CFG_USER
 #            PWD_PROTECTED: 'true'
+#            WEB_USER_ID: $CFG_USER
+#            WEB_USER_PASS_FILE: /run/secrets/web_user.pwd
         hostname: zen
         image: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}${CONTAINER_OS:-alpine}/zenphoto/${ZEN_VERSION:-1.5}:${CONTAINER_TAG:-latest}
+#        links:
+#            - mysql
+        logging:
+            driver: json-file
+            options:
+                max-file: "3"
+                max-size: "10m"
+        ports:
+            - 8004:80
+#        restart: unless-stopped
+        secrets:
+            - supervisord.pwd
+            - zenphoto.pwd
+#            - web_user.pwd
+        volumes:
+            - ./vols/log:/var/log
+            - ./vols/photos:/var/www/albums
+
+secrets:
+   supervisord.pwd:
+     file: ~/.inf/secrets/bobb.password
+   zenphoto.pwd:
+     file: ~/.inf/secrets/bobb.password
