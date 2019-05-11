@@ -12,6 +12,7 @@
 .LSOverride
 
 # Linux
+~*
 *~
 .directory
 .Trash-*
