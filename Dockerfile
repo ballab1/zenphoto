@@ -19,7 +19,7 @@ ARG ZEN_PASS=${CFG_PASS}
 ARG ZEN_USER=${CFG_USER}
 
 # postgres version being bundled in this docker image
-ARG ZEN_VERSION=1.5
+ARG ZEN_VERSION=1.5.4
 LABEL version.zenphoto=$ZEN_VERSION  
 
 
