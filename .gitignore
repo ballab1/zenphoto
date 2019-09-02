@@ -26,3 +26,7 @@ build/container_build_framework*
 **/CBF.properties
 scanned.paths
 *.loaded
+
+build/var/www/zp-data/zenphoto.cfg.bak.php
+build/var/www/zp-data/zenphoto.mysql.password.php
+

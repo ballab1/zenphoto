@@ -1,4 +1,4 @@
-Zenphoto Setup v1.5.1 : Sat, 30 Mar 2019 13:46:09 -0400
+Zenphoto Setup v1.5.4 : Sat, 31 Aug 2019 14:38:48 -0400
 Warn: PHP tidy support [is not present] tidy support is not critical but strongely recommended for properly truncating text containing HTML markup.
 Warn: Server seems to be nginx If you wish to create cruft-free URLs, you will need to configuring URL rewriting for NGINX servers. You can ignore this warning if you do not intend to set the mod_rewrite option.
 Completed system check

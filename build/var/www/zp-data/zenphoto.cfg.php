@@ -90,8 +90,12 @@ $conf['special_pages'] = array(
 // on your server, which might work better on some setups.
 ////////////////////////////////////////////////////////////////////////////////
 
-define('WEBPATH', '/photos');
-define('SERVERPATH', '/var/www');
+if (!defined('SERVERPATH')) {
+    define('SERVERPATH', '/var/www');
+}
+if (!defined('WEBPATH')) {
+    define('WEBPATH', '/photos');
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 $conf['CHMOD'] = 0444;
