@@ -64,7 +64,7 @@ $conf['album_folder_class'] = 'std';
 
 // Server Protocol
 
-$conf['server_protocol'] = "https";
+$conf['server_protocol'] = "http";
 
 // Change this to "https" if you use an HTTPS server (a "https://..." url)
 // Otherwise you should leave it at "http"
@@ -98,8 +98,9 @@ if (!defined('WEBPATH')) {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-$conf['CHMOD'] = 0444;
+$conf['CHMOD'] = 0666;
 if (!defined('CHMOD_VALUE')) { define('CHMOD_VALUE', $conf['CHMOD']); }
+
 /** Do not edit below this line. **/
 /**********************************/
 $_zp_conf_vars = $conf;
