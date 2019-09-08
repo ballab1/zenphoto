@@ -12,7 +12,7 @@ services:
                 FROM_BASE: ${DOCKER_REGISTRY:-ubuntu-s2:5000/}${CONTAINER_OS:-alpine}/php/${PHP7_VERSION:-7.2.22-r0}:${BASE_TAG:-latest}
                 ZEN_VERSION: ${ZEN_VERSION:-1.5}
             cache_from:
-                - ${DOCKER_REGISTRY:-ubuntu-s2:5000/}${CONTAINER_OS:-alpine}:${OS_VERSION:-3.8}
+                - ${DOCKER_REGISTRY:-ubuntu-s2:5000/}thirdparty/${CONTAINER_OS:-alpine}:${OS_VERSION:-3.8}
                 - ${DOCKER_REGISTRY:-ubuntu-s2:5000/}${CONTAINER_OS:-alpine}/base_container:${BASE_TAG:-latest}
                 - ${DOCKER_REGISTRY:-ubuntu-s2:5000/}${CONTAINER_OS:-alpine}/supervisord:${BASE_TAG:-latest}
                 - ${DOCKER_REGISTRY:-ubuntu-s2:5000/}${CONTAINER_OS:-alpine}/nginx-base/${NGINX_VERSION:-1.15.3}:${BASE_TAG:-latest}
