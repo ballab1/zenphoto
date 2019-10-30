@@ -8,3 +8,26 @@ mv -f * "${ZEN_DIR}/"
 [[ -f "${ZEN_DIR}/LICENSE" ]]           && rm "${ZEN_DIR}/LICENSE"
 [[ -f "${ZEN_DIR}/README.md" ]]         && rm "${ZEN_DIR}/README.md"
 [[ -f "${ZEN_DIR}/contributing.md" ]]   && rm "${ZEN_DIR}/contributing.md" 
+
+rm -rf "${ZEN_DIR}/zp-data"
+mv "/tmp${ZEN_DIR}/zp-data" "${ZEN_DIR}/zp-data"
+
+declare ZEN_DATA="${ZEN_DIR}/zp-data"
+
+chmod 700 "${ZEN_DATA}"
+chmod 400 "${ZEN_DATA}/.gitignore"
+chmod 444 "${ZEN_DATA}/.htaccess"
+chmod 400 "${ZEN_DATA}/charset_"*
+chmod 600 "${ZEN_DATA}/security.log"
+chmod 600 "${ZEN_DATA}/setup.log"
+chmod 400 "${ZEN_DATA}/"*.jpg
+chmod 600 "${ZEN_DATA}/zenphoto.cfg.bak.php"
+chmod 600 "${ZEN_DATA}/zenphoto.cfg.php"
+chmod 600 "${ZEN_DATA}/zenphoto.cfg.php~master"
+chmod 600 "${ZEN_DATA}/zenphoto.mysql.password.php"
+
+mv "${ZEN_DATA}/mutex" "${ZEN_DATA}/.mutex"
+chmod 755 "${ZEN_DATA}/.mutex"
+chmod 600 "${ZEN_DATA}/.mutex/cF"
+chmod 400 "${ZEN_DATA}/.mutex/sP"
+chmod 400 "${ZEN_DATA}/.mutex/zP"

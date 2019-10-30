@@ -101,6 +101,7 @@ if (!defined('WEBPATH')) {
 $conf['CHMOD'] = 0666;
 if (!defined('CHMOD_VALUE')) { define('CHMOD_VALUE', $conf['CHMOD']); }
 
+
 /** Do not edit below this line. **/
 /**********************************/
 $_zp_conf_vars = $conf;

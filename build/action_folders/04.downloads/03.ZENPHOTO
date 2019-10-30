@@ -8,4 +8,5 @@ ZENPHOTO['url']="https://github.com/zenphoto/zenphoto/archive/v${ZENPHOTO['versi
 ZENPHOTO['sha256_1.5']="ec104f05fd7271163de88783964b37732760bf1dbf4d314be8fb5a3a7c6a5d97"
 ZENPHOTO['sha256_1.5.1']="801f3c93610c41a6eb1f4fd536598948845ed23d3d70fceca2741db3d9bcec3c"
 ZENPHOTO['sha256_1.5.4']="c31587c3dc893f74ca8e4e4e966e4b3bbabc490554496a29d86fc8dd5d5d5a23"
+ZENPHOTO['sha256_1.5.5']="90a5dbdfb42b2c12cc655ddfa60eff12b45fa6f4b8853c5d37ba6be05d99e93b"
 ZENPHOTO['sha256']="${ZENPHOTO['sha256_'${ZENPHOTO['version']}]}" 

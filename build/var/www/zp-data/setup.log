@@ -1,4 +1,3 @@
-Zenphoto Setup v1.5.4 : Sat, 07 Sep 2019 14:33:43 -0400
+Zenphoto Setup v1.5.5 : Mon, 28 Oct 2019 18:15:24 -0400
+Warn: File Permissions [are loose (0666)] If file permissions are not set to strict or tighter there could be a security risk. However, on some servers Zenphoto does not function correctly with tight file permissions. If Zenphoto has permission errors, run setup again and select a more relaxed permission.Set File permissions to 	readonly (0444)	strict (0644)	relaxed (0664)	loose (0666)apply.
 Warn: Server seems to be nginx If you wish to create cruft-free URLs, you will need to configuring URL rewriting for NGINX servers. You can ignore this warning if you do not intend to set the mod_rewrite option.
-Completed system check
-Set Zenphoto default options
