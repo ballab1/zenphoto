@@ -1,3 +1,7 @@
-Zenphoto Setup v1.5.5 : Mon, 28 Oct 2019 18:15:24 -0400
+Zenphoto Setup v1.5.6 : Sun, 10 Nov 2019 16:32:04 -0500
+Warn: PHP version 5.6.40 PHP Version 5.6.0 or greater is required. Version 7.1.0 or greater is strongly recommended. Use earlier versions at your own risk. Zenphoto is developed on PHP 7.1+ and in any case not tested below 5.6. There will be no fixes if you encounter any issues below 5.6. Please contact your webhost about a PHP upgrade on your server.
+Warn: PHP tidy support [is not present] tidy support is not critical but strongely recommended for properly truncating text containing HTML markup.
 Warn: File Permissions [are loose (0666)] If file permissions are not set to strict or tighter there could be a security risk. However, on some servers Zenphoto does not function correctly with tight file permissions. If Zenphoto has permission errors, run setup again and select a more relaxed permission.Set File permissions to 	readonly (0444)	strict (0644)	relaxed (0664)	loose (0666)apply.
 Warn: Server seems to be nginx If you wish to create cruft-free URLs, you will need to configuring URL rewriting for NGINX servers. You can ignore this warning if you do not intend to set the mod_rewrite option.
+Completed system check
+Set Zenphoto default options
