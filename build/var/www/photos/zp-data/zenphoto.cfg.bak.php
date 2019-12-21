@@ -31,7 +31,7 @@ if (getenv('ZEN_PASS') != NULL) {
     $conf['mysql_pass'] = getenv('ZEN_PASS');
 }
 elseif (getenv('ZEN_PASS_FILE') != NULL) {
-    require '/var/www/zp-data/zenphoto.mysql.password.php';
+    require '/var/www/photos/zp-data/zenphoto.mysql.password.php';
 }
 $conf['mysql_host'] = getenv('ZEN_HOST');
 $conf['mysql_database'] = "zen";
@@ -60,6 +60,7 @@ $conf['UTF-8'] = true;
 //                      browsers, so certain features such as flash players cannot
 //                      display them
 $conf['album_folder'] = '/albums';
+$conf['in_webpath'] = '/albums';
 $conf['album_folder_class'] = 'std';
 
 // Server Protocol
@@ -75,11 +76,11 @@ $conf['server_protocol'] = "http";
 // for further documentation see the rewrite.php doc block
 //
 $conf['special_pages'] = array(
-      'page'=> array('define'=>'_PAGE_', 'rewrite'=>'page'),
-      'search'=> array('define'=>'_SEARCH_', 'rewrite'=>'_PAGE_/search'),
-      'archive'=> array('define'=>'_ARCHIVE_', 'rewrite'=>'_PAGE_/archive'),
-      'tags'=> array('define'=>'_TAGS_', 'rewrite'=>'_SEARCH_/tags')
-                                                );
+                                'page'=> array('define'=>'_PAGE_', 'rewrite'=>'page'),
+                                'search'=> array('define'=>'_SEARCH_', 'rewrite'=>'_PAGE_/search'),
+                                'archive'=> array('define'=>'_ARCHIVE_', 'rewrite'=>'_PAGE_/archive'),
+                                'tags'=> array('define'=>'_TAGS_', 'rewrite'=>'_SEARCH_/tags')
+                               );
 //
 ////////////////////////////////////////////////////////////////////////////////
 // Path Overrides
@@ -90,16 +91,17 @@ $conf['special_pages'] = array(
 // on your server, which might work better on some setups.
 ////////////////////////////////////////////////////////////////////////////////
 
-if (!defined('SERVERPATH')) {
-    define('SERVERPATH', '/var/www');
-}
-if (!defined('WEBPATH')) {
-    define('WEBPATH', '/photos');
-}
+//if (!defined('SERVERPATH')) {
+//    define('SERVERPATH', '/var/www/photos');
+//}
+//if (!defined('WEBPATH')) {
+//    define('WEBPATH', '/photos');
+//}
 
 ////////////////////////////////////////////////////////////////////////////////
-$conf['CHMOD'] = 0666;
+$conf['CHMOD'] = 0444;
 if (!defined('CHMOD_VALUE')) { define('CHMOD_VALUE', $conf['CHMOD']); }
+
 
 
 /** Do not edit below this line. **/

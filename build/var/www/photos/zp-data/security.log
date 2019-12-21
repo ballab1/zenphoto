@@ -1,0 +1,3 @@
+date	requestor’s IP	type	user ID	user name	outcome	authority	additional information
+2019-11-28 20:27:19	10.1.3.101	Install	bobb	Bob Ballantyne	Success	zp_admin	version 1.5.6
+2019-11-28 20:28:39	10.1.3.101	Protect setup scripts	bobb	Bob Ballantyne	Success	zp_admin	protected

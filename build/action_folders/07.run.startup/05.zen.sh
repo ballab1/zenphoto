@@ -33,6 +33,4 @@ sudo chmod 600 "${ZEN_DATA}/zenphoto.cfg.php"
 sudo chmod 600 "${ZEN_DATA}/zenphoto.cfg.php~master"
 sudo chmod 600 "${ZEN_DATA}/zenphoto.mysql.password.php"
 sudo chmod 755 "${ZEN_DATA}/.mutex"
-sudo chmod 600 "${ZEN_DATA}/.mutex/cF"
-sudo chmod 400 "${ZEN_DATA}/.mutex/sP"
-sudo chmod 400 "${ZEN_DATA}/.mutex/zP"
+sudo chmod 400 "${ZEN_DATA}/.mutex"/*

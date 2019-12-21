@@ -2,7 +2,7 @@
 
 declare -ar env_zen=(
     'WWW="${WWW:-/var/www}"'
-    'ZEN_DIR="${WWW:-/var/www}"'
+    'ZEN_DIR="${ZEN_DIR:-/var/www/photos}"'
     "ZEN_VERSION=${ZEN_VERSION:?}"
 )
 
