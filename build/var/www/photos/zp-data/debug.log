@@ -1,0 +1,5 @@
+{9841:Fri, 29 Nov 2019 01:26:45 GMT} Zenphoto v1.5.6
+  WARNING: fileperms(): stat failed for /var/www/photos/cache/1998.Angus/Angus3_w520.jpg in /var/www/photos/zp-core/setup/class-setup.php on line 612
+  fileperms called from setup::folderPermissions (class-setup.php [612])
+    from setup::folderPermissions (class-setup.php [603])
+      from setup_permissions_changer.php [18]

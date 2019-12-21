@@ -1,0 +1,267 @@
+Zenphoto Setup v1.5.6 : Thu, 28 Nov 2019 20:26:43 -0500
+Warn: zp-data security [is compromised] Zenphoto suggests you make the sensitive files in the zp-data folder accessable by owner only (permissions = 0600). The file permissions for setup.log are 0644 which may allow unauthorized access.
+Warn: File Permissions [are loose (0666)] If file permissions are not set to strict or tighter there could be a security risk. However, on some servers Zenphoto does not function correctly with tight file permissions. If Zenphoto has permission errors, run setup again and select a more relaxed permission.Set File permissions to 	readonly (0444)	strict (0644)	relaxed (0664)	loose (0666)apply.
+Setting permissions (0666) for Zenphoto package.
+Warn: Server seems to be nginx If you wish to create cruft-free URLs, you will need to configuring URL rewriting for NGINX servers. You can ignore this warning if you do not intend to set the mod_rewrite option.
+Setting permissions (0444) for albums.
+Notice: failed setting permissions (0444) for cache.
+Setting permissions (0444) for cache_html.
+Setting permissions (0444) for plugins.
+Completed system check
+Set Zenphoto default options
+Theme:basic setup started
+Theme:basic option interface instantiated
+Theme:basic setup completed
+Theme:garland setup started
+Theme:garland option interface instantiated
+Theme:garland setup completed
+Theme:zenpage setup started
+Theme:zenpage option interface instantiated
+Theme:zenpage setup completed
+Theme:zpmobile setup started
+Theme:zpmobile option interface instantiated
+Theme:zpmobile setup completed
+Plugin:admin-approval setup started
+Plugin:admin-approval setup completed
+Plugin:auto_backup setup started
+Plugin:auto_backup option interface instantiated (auto_backup)
+Plugin:auto_backup setup completed
+Plugin:bxslider_thumb_nav setup started
+Plugin:bxslider_thumb_nav option interface instantiated (bxslider)
+Plugin:bxslider_thumb_nav setup completed
+Plugin:cacheManager setup started
+Plugin:cacheManager setup completed
+Plugin:check_for_update setup started
+Plugin:check_for_update enabled (5 | ADMIN_PLUGIN)
+Plugin:check_for_update setup completed
+Plugin:class-AnyFile setup started
+Plugin:class-AnyFile option interface instantiated (AnyFile_Options)
+Plugin:class-AnyFile setup completed
+Plugin:class-textobject setup started
+Plugin:class-textobject option interface instantiated (textObject_Options)
+Plugin:class-textobject setup completed
+Plugin:class-video setup started
+Plugin:class-video enabled (990 | CLASS_PLUGIN)
+Plugin:class-video option interface instantiated (VideoObject_Options)
+Plugin:class-video setup completed
+Plugin:class-WEBdocs setup started
+Plugin:class-WEBdocs option interface instantiated (WEBdocs_Options)
+Plugin:class-WEBdocs setup completed
+Plugin:cloneZenphoto setup started
+Plugin:cloneZenphoto setup completed
+Plugin:colorbox_js setup started
+Plugin:colorbox_js enabled (800 | THEME_PLUGIN)
+Plugin:colorbox_js option interface instantiated (colorbox)
+Plugin:colorbox_js setup completed
+Plugin:comment_form setup started
+Plugin:comment_form enabled (5 | CLASS_PLUGIN)
+Plugin:comment_form option interface instantiated (comment_form)
+Plugin:comment_form setup completed
+Plugin:contact_form setup started
+Plugin:contact_form option interface instantiated (contactformOptions)
+Plugin:contact_form setup completed
+Plugin:cookieconsent setup started
+Plugin:cookieconsent option interface instantiated (cookieConsent)
+Plugin:cookieconsent setup completed
+Plugin:crop_image setup started
+Plugin:crop_image setup completed
+Plugin:defaultCodeblocks setup started
+Plugin:defaultCodeblocks option interface instantiated (defaultCodeblocks)
+Plugin:defaultCodeblocks setup completed
+Plugin:deprecated-functions setup started
+Plugin:zenphoto_sendmail enabled (900 | CLASS_PLUGIN)
+Plugin:zenphoto_sendmail option interface instantiated (deprecated_functions)
+Plugin:zenphoto_sendmail setup completed
+Plugin:downloadList setup started
+Plugin:downloadList option interface instantiated (downloadList)
+Plugin:downloadList setup completed
+Plugin:dynamic-locale setup started
+Plugin:dynamic-locale option interface instantiated (dynamic_locale)
+Plugin:dynamic-locale setup completed
+Plugin:elFinder setup started
+Plugin:elFinder enabled (5 | ADMIN_PLUGIN)
+Plugin:elFinder option interface instantiated (elFinder_options)
+Plugin:elFinder setup completed
+Plugin:email-newuser setup started
+Plugin:email-newuser setup completed
+Plugin:exampleMacros setup started
+Plugin:exampleMacros enabled (5 | ADMIN_PLUGIN | THEME_PLUGIN)
+Plugin:exampleMacros setup completed
+Plugin:favoritesHandler setup started
+Plugin:favoritesHandler option interface instantiated (favoritesOptions)
+Plugin:favoritesHandler setup completed
+Plugin:flag_thumbnail setup started
+Plugin:flag_thumbnail option interface instantiated (flag_thumbnail)
+Plugin:flag_thumbnail setup completed
+Plugin:galleryArticles setup started
+Plugin:galleryArticles option interface instantiated (galleryArticles)
+Plugin:galleryArticles setup completed
+Plugin:GoogleMap setup started
+Plugin:GoogleMap enabled (5 | THEME_PLUGIN)
+Plugin:GoogleMap option interface instantiated (GoogleMap)
+Plugin:GoogleMap setup completed
+Plugin:hitcounter setup started
+Plugin:hitcounter option interface instantiated (hitcounter)
+Plugin:hitcounter setup completed
+Plugin:html_meta_tags setup started
+Plugin:html_meta_tags option interface instantiated (htmlmetatags)
+Plugin:html_meta_tags setup completed
+Plugin:http_security_headers setup started
+Plugin:http_security_headers option interface instantiated (securityheadersOptions)
+Plugin:http_security_headers setup completed
+Plugin:image_album_statistics setup started
+Plugin:image_album_statistics setup completed
+Plugin:ipBlocker setup started
+Plugin:ipBlocker option interface instantiated (ipBlocker)
+Plugin:ipBlocker setup completed
+Plugin:jplayer setup started
+Plugin:jplayer option interface instantiated (jplayer_options)
+Plugin:jplayer setup completed
+Plugin:macroList setup started
+Plugin:macroList setup completed
+Plugin:markRelease setup started
+Plugin:markRelease setup completed
+Plugin:matomo setup started
+Plugin:matomo option interface instantiated (matomoStats)
+Plugin:matomo setup completed
+Plugin:menu_manager setup started
+Plugin:menu_manager enabled (5 | ADMIN_PLUGIN | THEME_PLUGIN)
+Plugin:menu_manager option interface instantiated (menu_manager)
+Plugin:menu_manager setup completed
+Plugin:mergedRSS setup started
+Plugin:mergedRSS option interface instantiated (MergedRSSOptions)
+Plugin:mergedRSS setup completed
+Plugin:mobileTheme setup started
+Plugin:mobileTheme option interface instantiated (mobileTheme)
+Plugin:mobileTheme setup completed
+Plugin:multiple_layouts setup started
+Plugin:multiple_layouts option interface instantiated (multipleLayoutOptions)
+Plugin:multiple_layouts setup completed
+Plugin:openstreetmap setup started
+Plugin:openstreetmap option interface instantiated (openStreetMapOptions)
+Plugin:openstreetmap setup completed
+Plugin:paged_thumbs_nav setup started
+Plugin:paged_thumbs_nav option interface instantiated (pagedthumbsOptions)
+Plugin:paged_thumbs_nav setup completed
+Plugin:PHPMailer setup started
+Plugin:PHPMailer option interface instantiated (zp_PHPMailer)
+Plugin:PHPMailer setup completed
+Plugin:print_album_menu setup started
+Plugin:print_album_menu enabled (5 | THEME_PLUGIN)
+Plugin:print_album_menu option interface instantiated (print_album_menu)
+Plugin:print_album_menu setup completed
+Plugin:publishContent setup started
+Plugin:publishContent setup completed
+Plugin:quota_manager setup started
+Plugin:quota_manager option interface instantiated (quota_manager)
+Plugin:quota_manager setup completed
+Plugin:rating setup started
+Plugin:rating option interface instantiated (jquery_rating)
+Plugin:rating setup completed
+Plugin:reCaptcha setup started
+Plugin:reCaptcha option interface instantiated (reCaptcha)
+Plugin:reCaptcha setup completed
+Plugin:redirector setup started
+Plugin:redirector option interface instantiated (redirectorOptions)
+Plugin:redirector setup completed
+Plugin:register_user setup started
+Plugin:register_user option interface instantiated (register_user)
+Plugin:register_user setup completed
+Plugin:related_items setup started
+Plugin:related_items setup completed
+Plugin:rewriteRules setup started
+Plugin:rewriteRules setup completed
+Plugin:rewriteTokens setup started
+Plugin:rewriteTokens option interface instantiated (rewriteTokens)
+rewriteTokens restored to default
+Plugin:rewriteTokens setup completed
+Plugin:rss setup started
+Plugin:rss enabled (900 | FEATURE_PLUGIN)
+Plugin:rss option interface instantiated (rss_options)
+Plugin:rss setup completed
+Plugin:scriptless-socialsharing setup started
+Plugin:scriptless-socialsharing option interface instantiated (scriptlessSocialsharingOptions)
+Plugin:scriptless-socialsharing setup completed
+Plugin:search_statistics setup started
+Plugin:search_statistics option interface instantiated (search_statistics)
+Plugin:search_statistics setup completed
+Plugin:security-logger setup started
+Plugin:security-logger enabled (100 | CLASS_PLUGIN)
+Plugin:security-logger option interface instantiated (security_logger)
+Plugin:security-logger setup completed
+Plugin:seo_cleanup setup started
+Plugin:seo_cleanup setup completed
+Plugin:seo_locale setup started
+Plugin:seo_locale setup completed
+Plugin:seo_null setup started
+Plugin:seo_null setup completed
+Plugin:seo_zenphoto setup started
+Plugin:seo_zenphoto option interface instantiated (zenphoto_seo)
+Plugin:seo_zenphoto setup completed
+Plugin:show_not_logged-in setup started
+Plugin:show_not_logged-in setup completed
+Plugin:simpleSpam setup started
+Plugin:simpleSpam option interface instantiated (zpSimpleSpam)
+Plugin:simpleSpam setup completed
+Plugin:sitemap-extended setup started
+Plugin:sitemap-extended option interface instantiated (sitemapOptions)
+Plugin:sitemap-extended setup completed
+Plugin:site_upgrade setup started
+Plugin:site_upgrade option interface instantiated (rss_options)
+Plugin:site_upgrade setup completed
+Plugin:slideshow2 setup started
+Plugin:slideshow2 option interface instantiated (cycle)
+Plugin:slideshow2 setup completed
+Plugin:static_html_cache setup started
+Plugin:static_html_cache option interface instantiated (static_html_cache)
+Plugin:static_html_cache setup completed
+Plugin:tag_extras setup started
+Plugin:tag_extras setup completed
+Plugin:tag_suggest setup started
+Plugin:tag_suggest option interface instantiated (tagsuggest)
+Plugin:tag_suggest setup completed
+Plugin:themeSwitcher setup started
+Plugin:themeSwitcher option interface instantiated (themeSwitcher)
+Plugin:themeSwitcher setup completed
+Plugin:tinymce4 setup started
+Plugin:tinymce4 option interface instantiated (tinymce4Options)
+Plugin:tinymce4 setup completed
+Plugin:tinyURL setup started
+Plugin:tinyURL option interface instantiated (tinyURL)
+Plugin:tinyURL setup completed
+Plugin:trivialSpam setup started
+Plugin:trivialSpam option interface instantiated (zpTrivialSpam)
+Plugin:trivialSpam setup completed
+Plugin:uploader_http setup started
+Plugin:uploader_http enabled (5 | ADMIN_PLUGIN)
+Plugin:uploader_http setup completed
+Plugin:uploader_jQuery setup started
+Plugin:uploader_jQuery setup completed
+Plugin:user-expiry setup started
+Plugin:user-expiry option interface instantiated (user_expiry)
+Plugin:user-expiry setup completed
+Plugin:userAddressFields setup started
+Plugin:userAddressFields enabled (5 | CLASS_PLUGIN)
+Plugin:userAddressFields setup completed
+Plugin:user_groups setup started
+Plugin:user_groups setup completed
+Plugin:user_login-out setup started
+Plugin:user_login-out option interface instantiated (user_logout_options)
+Plugin:user_login-out setup completed
+Plugin:user_mailing_list setup started
+Plugin:user_mailing_list setup completed
+Plugin:xmpMetadata setup started
+Plugin:xmpMetadata option interface instantiated (xmpMetadata)
+Plugin:xmpMetadata setup completed
+Plugin:zenpage setup started
+Plugin:zenpage enabled (9 | CLASS_PLUGIN)
+Plugin:zenpage option interface instantiated (zenpagecms)
+Plugin:zenpage setup completed
+Plugin:zenphotoDonate setup started
+Plugin:zenphotoDonate setup completed
+Plugin:zenphoto_news setup started
+Plugin:zenphoto_news option interface instantiated (zenphoto_org_news)
+Plugin:zenphoto_news setup completed
+Plugin:zenphoto_sendmail setup started
+Plugin:zenphoto_sendmail enabled (5 | CLASS_PLUGIN)
+Plugin:zenphoto_sendmail setup completed
