@@ -6,14 +6,14 @@ services:
       args:
         CBF_VERSION: '134b5fa032363440ed66115a9f96538680326aba'
         CONTAINER_NAME: zen
-        FROM_BASE: 'ubuntu-s2:5000/alpine/php/7.2.22-r0:dev'
+        FROM_BASE: 'ubuntu-s2.home:5000/alpine/php/7.2.22-r0:dev'
         ZEN_VERSION: 1.5.6
       cache_from:
-        - ubuntu-s2:5000/thirdparty/alpine:3.8
-        - ubuntu-s2:5000/alpine/base_container:dev
-        - ubuntu-s2:5000/alpine/supervisord:dev
-        - ubuntu-s2:5000/alpine/nginx-base/1.16.1:dev
-        - ubuntu-s2:5000/alpine/php/7.2.22-r0:dev
+        - ubuntu-s2.home:5000/thirdparty/alpine:3.8
+        - ubuntu-s2.home:5000/alpine/base_container:dev
+        - ubuntu-s2.home:5000/alpine/supervisord:dev
+        - ubuntu-s2.home:5000/alpine/nginx-base/1.16.1:dev
+        - ubuntu-s2.home:5000/alpine/php/7.2.22-r0:dev
       context: .
       dockerfile: Dockerfile
       labels:
@@ -24,12 +24,12 @@ services:
         container.git.url: 'https://github.com/ballab1/zenphoto.git'
         container.origin: 'v3.9.1-dirty-dirty-'
         container.original.name: 'zenphoto'
-        container.parent: 'ubuntu-s2:5000/alpine/php/7.2.22-r0:4aaa2fdf868639fa54e00254c47325142e3cf1e6cf9540f7907de2d2557425d0'
+        container.parent: 'ubuntu-s2.home:5000/alpine/php/7.2.22-r0:4aaa2fdf868639fa54e00254c47325142e3cf1e6cf9540f7907de2d2557425d0'
         version.cbf: '134b5fa032363440ed66115a9f96538680326aba'
     container_name: zen
     environment:
       DEBUG_TRACE: 0
       ZEN_HOST: mysql
     hostname: zen
-    image: ubuntu-s2:5000/alpine/zenphoto/1.5.6:fd7350a22018d04a738423ec84133833b7796d5a9ea8f039cb93cea8ab8aa8c6
+    image: ubuntu-s2.home:5000/alpine/zenphoto/1.5.6:fd7350a22018d04a738423ec84133833b7796d5a9ea8f039cb93cea8ab8aa8c6
 
